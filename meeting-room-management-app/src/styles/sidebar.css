@@ -1,6 +1,7 @@
 .sidebar-container {
   position: fixed;
-  width: 220px;
+  max-width: 200px;
+  min-width: 180px;
   height: 80%;
   left: 0;
   overflow-x: hidden;

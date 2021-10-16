@@ -1,7 +1,7 @@
-import { Container, Col, Row } from "react-bootstrap";
+
 
 import React from 'react';
-import SideBar from "./sideBar";
+import SideBar from "../components/sideBar";
 import '../styles/content.css';
 
 
