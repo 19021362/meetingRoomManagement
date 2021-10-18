@@ -10,6 +10,18 @@
   color: rgb(65, 65, 65);
 }
 
+.room-sidebar-container {
+  margin-top: 300px;
+  position: fixed;
+  max-width: 200px;
+  min-width: 200px;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: rgb(238, 238, 238);
+  color: rgb(65, 65, 65);
+}
+
 
 
 .sidebar-logo {
@@ -35,7 +47,7 @@
 }
 
 .sidebar-navigation li a {
-  padding: 10px 15px 10px 30px;
+  padding: 10px 0px 10px 30px;
   display: block;
   color: rgb(65, 65, 65);
 }

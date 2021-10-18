@@ -8,6 +8,7 @@ import '../styles/content.css';
 
 
 const Home = () => {
+
     return (
         <>
             <SideBar />

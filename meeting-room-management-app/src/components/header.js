@@ -15,7 +15,7 @@ const Header = () => {
             <div className="Header">
                 <Navbar bg="light" expand="lg">
                     <Container fluid>
-                        <LinkContainer to="/">
+                        <LinkContainer to="/home">
                             <Navbar.Brand href="/home">SROOM</Navbar.Brand>
                         </LinkContainer>
                         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -25,7 +25,9 @@ const Header = () => {
                                 style={{ maxHeight: '100px' }}
                                 navbarScroll
                             >
-                                <Nav.Link href="#action2">Room</Nav.Link>
+                                <LinkContainer to="/room">
+                                    <Nav.Link href="/room">Room</Nav.Link>
+                                </LinkContainer>
                                 <Nav.Link href="#action3">Schedule</Nav.Link>
                                 <Nav.Link href="#action4">Create meeting</Nav.Link>
                             </Nav>

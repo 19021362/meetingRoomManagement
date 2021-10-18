@@ -3,3 +3,14 @@
     
     background-color: lavender;
 }
+
+.col-1 {
+    max-width: 200px;
+    text-align: center;
+    border-right: black;
+}
+
+/* tbody, td {
+    border-width: 1px !important;
+    border-right: black !important;
+} */

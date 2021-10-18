@@ -2,12 +2,13 @@ import Home from "./pages/home.js";
 import Login from "./pages/login.js";
 import Signup from "./pages/register.js";
 import { Switch, Route } from "react-router-dom";
+import Room from "./pages/room.js";
 
 
 export default function Routes() {
     return (
         <Switch>
-            <Route exact path="/">
+            <Route exact path="/home">
                 <Home />
             </Route>
             <Route exact path="/login">
@@ -15,6 +16,9 @@ export default function Routes() {
             </Route>
             <Route exact path="/signup">
                 <Signup />
+            </Route>
+            <Route exact path="/room">
+                <Room />
             </Route>
         </Switch>
     );

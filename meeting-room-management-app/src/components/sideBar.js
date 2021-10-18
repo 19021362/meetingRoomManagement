@@ -1,14 +1,18 @@
 import '../styles/sidebar.css';
 
 const SideBar = () => {
+    function isRoom() {
+        alert(URL.toString)
+    }
+
     return (
         <>
             <div class="sidebar-container">
                 <div class="sidebar-logo">
-                <i class="fa fa-bars" aria-hidden="true"></i> MENU
+                    <i class="fa fa-bars" aria-hidden="true"></i> MENU
                 </div>
                 <ul class="sidebar-navigation">
-                    
+
                     <li>
                         <a href="#">
                             <i class="fa fa-home" aria-hidden="true"></i> Homepage
@@ -19,7 +23,6 @@ const SideBar = () => {
                             <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
                         </a>
                     </li>
-                    
                     <li>
                         <a href="#">
                             <i class="fa fa-users" aria-hidden="true"></i> Profile
@@ -37,7 +40,10 @@ const SideBar = () => {
                     </li>
                 </ul>
 
+                <hr></hr>
+
                 
+
             </div>
 
 
