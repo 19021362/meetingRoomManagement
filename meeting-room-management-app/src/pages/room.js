@@ -29,11 +29,11 @@ const Room = () => {
                 </div>
                 <div class="sidebar-navigation">
                     <ul class="sidebar-navigation">
-                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Phòng 1</a></li>
-                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Phòng 2</a></li>
-                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Phòng 3</a></li>
-                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Phòng 4</a></li>
-                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Phòng 5</a></li>
+                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Room 1</a></li>
+                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Room 2</a></li>
+                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Room 3</a></li>
+                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Room 4</a></li>
+                        <li><a href="#"><i class="fa fa-circle" aria-hidden="true"></i>Room 5</a></li>
                     </ul>
                 </div>
             </div>

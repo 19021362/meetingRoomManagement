@@ -18,7 +18,7 @@ export default function Signup() {
   }
 
   return (
-    <div className="Login">
+    <div className="LoginSignup">
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>

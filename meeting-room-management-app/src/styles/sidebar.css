@@ -50,6 +50,7 @@
   padding: 10px 0px 10px 30px;
   display: block;
   color: rgb(65, 65, 65);
+  text-decoration: none;
 }
 
 .sidebar-navigation li .fa {
@@ -61,6 +62,7 @@
 .sidebar-navigation li a:focus {
   text-decoration: none;
   outline: none;
+  background-color: #0099ff;
 }
 
 .sidebar-navigation li::before {

@@ -24,12 +24,17 @@ const Header = () => {
                                 className="me-auto my-2 my-lg-0"
                                 style={{ maxHeight: '100px' }}
                                 navbarScroll
+                                activeKey={window.location.pathname}
                             >
                                 <LinkContainer to="/room">
                                     <Nav.Link href="/room">Room</Nav.Link>
                                 </LinkContainer>
-                                <Nav.Link href="#action3">Schedule</Nav.Link>
-                                <Nav.Link href="#action4">Create meeting</Nav.Link>
+                                <LinkContainer to="/schedule">
+                                    <Nav.Link href="/schedule">Schedule</Nav.Link>
+                                </LinkContainer>
+                                <Container to="/createMeeting">
+                                    <Nav.Link href="/createMeeting">Create meeting</Nav.Link>
+                                </Container>
                             </Nav>
                             <Form className="d-flex">
                                 <Nav activeKey={window.location.pathname}>
