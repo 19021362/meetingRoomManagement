@@ -3,6 +3,9 @@
 import React from 'react';
 import SideBar from "../components/sideBar";
 import { Table, Dropdown, Form } from 'react-bootstrap';
+import FullCalendar from "@fullcalendar/react";
+import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
+
 import '../styles/content.css';
 import '../styles/sidebar.css';
 
@@ -23,6 +26,8 @@ const Room = () => {
     return (
         <>
             <SideBar />
+
+
             <div class="room-sidebar-container">
                 <div class="sidebar-logo">
                     <i class="fa fa-star" aria-hidden="true"></i> ROOM
@@ -39,9 +44,22 @@ const Room = () => {
             </div>
             <div class="content-container">
 
-                <div class="container-fluid">
+                <div class="container-fluid" style={{backgroundColor:"white"}}>
 
-                    <Table responsive>
+                    <FullCalendar
+                        schedulerLicenseKey='CC-Attribution-NonCommercial-NoDerivatives'
+                        plugins={[resourceTimeGridPlugin]}
+                        initialView="resourceTimeGridDay"
+                        resources={[
+                            { id: '1', title: 'Room 1' },
+                            { id: '2', title: 'Room 2' },
+                            { id: '3', title: 'Room 3' },
+                            { id: '4', title: 'Room 4' },
+                            { id: '5', title: 'Room 5' }
+                        ]}
+                    />
+
+                    {/* <Table responsive>
                         <thead>
                             <tr>
                                 <th class="col-1">
@@ -208,7 +226,7 @@ const Room = () => {
                                 ))}
                             </tr>
                         </tbody>
-                    </Table>
+                    </Table> */}
 
                 </div>
             </div>

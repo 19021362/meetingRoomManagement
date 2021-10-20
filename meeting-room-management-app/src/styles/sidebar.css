@@ -53,13 +53,28 @@
   text-decoration: none;
 }
 
-.sidebar-navigation li .fa {
+.sidebar-navigation li button {
+  padding: 10px 0px 10px 30px;
+  display: block;
+  color: rgb(65, 65, 65);
+  text-decoration: none;
+}
+
+.sidebar-navigation li .fa  {
   margin-right: 10px;
 }
 
 .sidebar-navigation li a:active,
 .sidebar-navigation li a:hover,
 .sidebar-navigation li a:focus {
+  text-decoration: none;
+  outline: none;
+  background-color: #0099ff;
+}
+
+.sidebar-navigation li button:active,
+.sidebar-navigation li button:hover,
+.sidebar-navigation li button:focus {
   text-decoration: none;
   outline: none;
   background-color: #0099ff;
@@ -101,3 +116,4 @@
   text-align: center;
   color: white;
 }
+

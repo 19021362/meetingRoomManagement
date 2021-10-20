@@ -1,6 +1,9 @@
 
 
+import Button from '@restart/ui/esm/Button';
 import React from 'react';
+import { Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import SideBar from "../components/sideBar";
 import '../styles/content.css';
 
@@ -8,6 +11,7 @@ import '../styles/content.css';
 
 
 const Home = () => {
+
 
     return (
         <>
@@ -20,9 +24,11 @@ const Home = () => {
                         <h1>Chào mừng đến với SROOM!</h1>
                         <p>Phần mềm hỗ trợ công ty, doanh nghiệp quản lí phòng họp khoa học, hiệu quả.</p>
                         <p>Tìm và đặt phòng họp dễ dàng hơn bao giờ hết</p>
-                        <p>
-                            <a class="btn btn-lg btn-primary" href="#" role="button">View more &raquo;</a>
-                        </p>
+                        <Nav activeKey={window.location.pathname}>
+                            <LinkContainer to="/login">
+                                <Nav.Link>View more</Nav.Link>
+                            </LinkContainer>
+                        </Nav>
                     </div>
 
                 </div>

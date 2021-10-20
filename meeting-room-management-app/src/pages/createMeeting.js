@@ -155,12 +155,12 @@ export default function CreateMeeting() {
                         </Form.Group>
                     </Form>
                 </div>
-                <Button block size="lg" type="button" disabled={!validateForm()}
+                <Button block size="md" type="button" disabled={!validateForm()}
                     style={{ width: "120px", margin: "20px 10px 10px 10px" }} variant="outline-primary"
                     onClick={previous}>
                     Previous
                 </Button>
-                <Button block size="lg" type="button" disabled={!validateForm()}
+                <Button block size="md" type="button" disabled={!validateForm()}
                     style={{ width: "120px", margin: "20px 10px 10px 10px" }} variant="outline-primary"
                     onClick={successAlert}>
                     Create
@@ -183,8 +183,10 @@ export default function CreateMeeting() {
 
         return (
             <FullCalendar
+                schedulerLicenseKey='CC-Attribution-NonCommercial-NoDerivatives'
                 plugins={[resourceTimeGridPlugin]}
                 initialView="resourceTimeGridDay"
+                initialDate = {m_date}
                 resources={[
                     { id: '1', title: 'Room 1' },
                     { id: '2', title: 'Room 2' },
