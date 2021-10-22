@@ -15,7 +15,7 @@ const Header = () => {
             <div className="Header">
                 <Navbar bg="light" expand="lg">
                     <Container fluid>
-                        <LinkContainer to="/home">
+                        <LinkContainer to="/">
                             <Navbar.Brand href="/home">SROOM</Navbar.Brand>
                         </LinkContainer>
                         <Navbar.Toggle aria-controls="navbarScroll" />

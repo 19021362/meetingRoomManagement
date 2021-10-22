@@ -10,6 +10,7 @@ import MultiEmails from '../tag/multiEmail.js';
 
 import "../styles/createMeeting.css";
 import { render } from "preact";
+import RoomDetail from "../components/roomDetail.js";
 
 export default function CreateMeeting() {
 
@@ -22,8 +23,10 @@ export default function CreateMeeting() {
     const [m_finishTime, setM_finishTime] = useState("");
     const [m_room, setM_room] = useState("");
     const [m_participants, setM_participants] = useState("");
+    const [m_priority, setM_priority] = useState("")
 
     var currentStep = 1;
+    var rooms = new RoomDetail().getRoomsDetail();
 
     function validateForm() {
         return (m_name.length > 0 && m_date.length > 0);
@@ -45,13 +48,15 @@ export default function CreateMeeting() {
     const successAlert = () => {
         alert(
             "Successfully!" + "\n" +
-                "Meeting detail:" + "\n" +
-                "Name: " + m_name + "\n" +
-                "Description: " + m_desc + "\n" +
-                "Will take place in" + m_room + "\n" +
-                "on: " + m_date + "\n" +
-                "at: " + m_startTime + "\n" +
-                "end at: " + m_finishTime
+            "Meeting detail:" + "\n" +
+            "Name: " + m_name + "\n" +
+            "Description: " + m_desc + "\n" +
+            "participant: " + m_participants + "\n" +
+            "Will take place in " + m_room + "\n" +
+            "on: " + m_date + "\n" +
+            "at: " + m_startTime + "\n" +
+            "end at: " + m_finishTime + "\n" +
+            "priority: " + m_priority
 
         );
         setFormStep(0);
@@ -108,7 +113,15 @@ export default function CreateMeeting() {
 
                         <Form.Group size="lg" controlId="parts">
                             <Form.Label>Participants</Form.Label>
-                            <MultiEmails />
+                            <MultiEmails
+                            />
+                        </Form.Group>
+                        <Form.Group size="lg" controlId="priority">
+                            <Form.Label>Priority</Form.Label>
+                            <select class="form-control" value={m_priority} onChange={(e) => setM_priority(e.target.value)}>
+                                <option>thông thường</option>
+                                <option>khẩn cấp</option>
+                            </select>
                         </Form.Group>
                     </Form>
                 </div>
@@ -146,11 +159,9 @@ export default function CreateMeeting() {
                         <Form.Group size="lg" controlId="room">
                             <Form.Label>Room</Form.Label>
                             <select class="form-control" value={m_room} onChange={(e) => setM_room(e.target.value)}>
-                                <option>Room 1</option>
-                                <option>Room 2</option>
-                                <option>Room 3</option>
-                                <option>Room 4</option>
-                                <option>Room 5</option>
+                                {Array.from({ length: rooms.length }).map((_, index) => (
+                                    <option key={index}>{rooms[index].title}</option>
+                                ))}
                             </select>
                         </Form.Group>
                     </Form>
@@ -175,6 +186,8 @@ export default function CreateMeeting() {
             <FullCalendar
                 plugins={[timeGridPlugin]}
                 initialView="timeGridWeek"
+                slotMinTime="06:00:00"
+                slotMaxTime="21:00:00"
             />
         );
     }
@@ -186,14 +199,10 @@ export default function CreateMeeting() {
                 schedulerLicenseKey='CC-Attribution-NonCommercial-NoDerivatives'
                 plugins={[resourceTimeGridPlugin]}
                 initialView="resourceTimeGridDay"
-                initialDate = {m_date}
-                resources={[
-                    { id: '1', title: 'Room 1' },
-                    { id: '2', title: 'Room 2' },
-                    { id: '3', title: 'Room 3' },
-                    { id: '4', title: 'Room 4' },
-                    { id: '5', title: 'Room 5' }
-                ]}
+                initialDate={m_date}
+                resources={rooms}
+                slotMinTime="06:00:00"
+                slotMaxTime="21:00:00"
             />
         );
 

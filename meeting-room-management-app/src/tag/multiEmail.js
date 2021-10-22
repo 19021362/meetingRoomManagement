@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 export default class MultiEmails extends React.Component {
+    
     state = {
         items: [],
         value: "",
@@ -80,6 +81,7 @@ export default class MultiEmails extends React.Component {
     }
 
     render() {
+    
         return (
             <>
                 {this.state.items.map(item => (

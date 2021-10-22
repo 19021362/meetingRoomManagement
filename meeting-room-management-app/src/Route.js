@@ -10,7 +10,7 @@ import CreateMeeting from "./pages/createMeeting.js";
 export default function Routes() {
     return (
         <Switch>
-            <Route exact path="/home">
+            <Route exact path="/">
                 <Home />
             </Route>
             <Route exact path="/login">

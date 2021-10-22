@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 
 const Schedule = () => {
 
-    const [viewMode, setViewMode] = React.useState();
+    const [viewMode, setViewMode] = React.useState(0);
 
     const setMonthView = () => {
         setViewMode(0);
