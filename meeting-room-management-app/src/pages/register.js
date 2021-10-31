@@ -21,7 +21,7 @@ export default function Signup() {
     <div className="LoginSignup">
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Tên đăng nhập</Form.Label>
           <Form.Control
             autoFocus
             type="email"
@@ -30,7 +30,7 @@ export default function Signup() {
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Mật khẩu</Form.Label>
           <Form.Control
             type="password"
             value={password}
@@ -38,7 +38,7 @@ export default function Signup() {
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label>Re-password</Form.Label>
+          <Form.Label>Nhập lại mật khẩu</Form.Label>
           <Form.Control
             type="password"
             value={rePassword}
@@ -47,7 +47,7 @@ export default function Signup() {
         </Form.Group>
         <Button block size="lg" type="submit" disabled={!validateForm()}
                 style={{width:"320px", marginTop:"20px"}} variant="outline-primary">
-          Signup
+          Đăng kí
         </Button>
       </Form>
     </div>
