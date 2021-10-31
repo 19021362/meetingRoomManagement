@@ -20,7 +20,7 @@ export default function Login() {
     <div className="LoginSignup">
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Tên đăng nhập</Form.Label>
           <Form.Control
             autoFocus
             type="email"
@@ -29,7 +29,7 @@ export default function Login() {
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Mật khẩu</Form.Label>
           <Form.Control
             type="password"
             value={password}
@@ -38,7 +38,7 @@ export default function Login() {
         </Form.Group>
         <Button block size="lg" type="submit" disabled={!validateForm()}
                 style={{width:"320px", marginTop:"20px"}} variant="outline-primary">
-          Login
+          Đăng nhập
         </Button>
       </Form>
     </div>
