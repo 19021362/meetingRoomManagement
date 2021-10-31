@@ -29,7 +29,7 @@ const Schedule = () => {
 
             <div class="room-sidebar-container">
                 <div class="sidebar-logo">
-                    <i class="fa fa-star" aria-hidden="true"></i> Schedule
+                    <i class="fa fa-star" aria-hidden="true"></i> Lịch trình
                 </div>
                 <div class="sidebar-navigation">
                     <ul class="sidebar-navigation">
@@ -37,21 +37,21 @@ const Schedule = () => {
                             <Button block size="md" type="button" variant="primary" onClick={setMonthView} type="button"
                                 style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
                                 <i class="fa fa-circle" aria-hidden="true"></i>
-                                Month view
+                                Tháng
                             </Button>
                         </li>
                         <li>
                             <Button block size="md" type="button" variant="primary" onClick={setWeekView} type="button"
                                 style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
                                 <i class="fa fa-circle" aria-hidden="true"></i>
-                                Week view
+                                Tuần
                             </Button>
                         </li>
                         <li>
                             <Button block size="md" type="button" variant="primary" onClick={setCEventsView} type="button"
                                 style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
                                 <i class="fa fa-circle" aria-hidden="true"></i>
-                                Coming events
+                                Sự kiện sắp tới
                             </Button>
                         </li>
                     </ul>
