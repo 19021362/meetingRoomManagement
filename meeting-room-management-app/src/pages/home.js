@@ -26,7 +26,7 @@ const Home = () => {
                         <p>Tìm và đặt phòng họp dễ dàng hơn bao giờ hết</p>
                         <Nav activeKey={window.location.pathname}>
                             <LinkContainer to="/login">
-                                <Nav.Link>View more</Nav.Link>
+                                <Nav.Link>Xem thêm</Nav.Link>
                             </LinkContainer>
                         </Nav>
                     </div>
