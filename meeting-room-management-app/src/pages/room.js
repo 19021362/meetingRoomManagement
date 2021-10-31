@@ -31,7 +31,7 @@ const Room = () => {
             <div class="room-sidebar-container">
                 <div class="sidebar-logo">
                     <Label onClick={() => setRoomId(0)}>
-                        <i class="fa fa-star" aria-hidden="true"></i> ROOM
+                        <i class="fa fa-star" aria-hidden="true"></i> Phòng họp
                     </Label>
                 </div>
                 <div class="sidebar-navigation">
@@ -83,11 +83,11 @@ const Room = () => {
                         <Card.Header><h2>{rooms[roomId - 1].title}</h2></Card.Header>
                         <Card.Body>
                             <ul>
-                                <li>Department : {rooms[roomId - 1].department}<br /></li>
-                                <li>Floor : {rooms[roomId - 1].floor}<br /></li>
-                                <li>Area : {rooms[roomId - 1].area}<br /></li>
-                                <li>Number of chairs : {rooms[roomId - 1].chair}<br /></li>
-                                <li>Equipments : {rooms[roomId - 1].equipments}<br /></li>
+                                <li>Tòa nhà : {rooms[roomId - 1].department}<br /></li>
+                                <li>Tầng : {rooms[roomId - 1].floor}<br /></li>
+                                <li>Diện tích : {rooms[roomId - 1].area}<br /></li>
+                                <li>Sức chứa : {rooms[roomId - 1].chair}<br /></li>
+                                <li>Thiết bị : {rooms[roomId - 1].equipments}<br /></li>
                             </ul>
                         </Card.Body>
                     </Card>
