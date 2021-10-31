@@ -66,7 +66,7 @@ export default function CreateMeeting() {
     return (
         <>
             <div className="Crm-form">
-                <div><h3>New meeting!</h3></div>
+                <div><h3>Tạo cuộc họp mới!</h3></div>
                 {formStep === 0 && fstep1()}
                 {formStep === 1 && fstep2()}
             </div>
@@ -84,7 +84,7 @@ export default function CreateMeeting() {
                 <div class="Name-form">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group size="lg" controlId="name">
-                            <Form.Label>Meeting name</Form.Label>
+                            <Form.Label>Tên cuộc họp</Form.Label>
                             <Form.Control
                                 autoFocus
                                 type="text"
@@ -94,7 +94,7 @@ export default function CreateMeeting() {
                         </Form.Group>
 
                         <Form.Group size="lg" controlId="date">
-                            <Form.Label>Date</Form.Label>
+                            <Form.Label>Ngày tổ chức</Form.Label>
                             <Form.Control
                                 type="date"
                                 value={m_date}
@@ -103,7 +103,7 @@ export default function CreateMeeting() {
                         </Form.Group>
 
                         <Form.Group size="lg" controlId="desc">
-                            <Form.Label>Meeting description</Form.Label>
+                            <Form.Label>Thêm mô tả</Form.Label>
                             <Form.Control as="textarea"
                                 type="textarea" row="3"
                                 value={m_desc}
@@ -112,12 +112,12 @@ export default function CreateMeeting() {
                         </Form.Group>
 
                         <Form.Group size="lg" controlId="parts">
-                            <Form.Label>Participants</Form.Label>
+                            <Form.Label>Thêm thành viên</Form.Label>
                             <MultiEmails
                             />
                         </Form.Group>
                         <Form.Group size="lg" controlId="priority">
-                            <Form.Label>Priority</Form.Label>
+                            <Form.Label>Mức độ ưu tiên</Form.Label>
                             <select class="form-control" value={m_priority} onChange={(e) => setM_priority(e.target.value)}>
                                 <option>thông thường</option>
                                 <option>khẩn cấp</option>
@@ -128,7 +128,7 @@ export default function CreateMeeting() {
                 <Button block size="lg" type="button" disabled={!validateForm()}
                     style={{ width: "120px", margin: "20px 10px 10px 10px" }} variant="outline-primary"
                     onClick={next}>
-                    Next
+                    Tiếp
                 </Button>
             </>
         );
@@ -140,7 +140,7 @@ export default function CreateMeeting() {
                 <div class="Name-form">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group size="lg" controlId="startTime">
-                            <Form.Label>Choose time from</Form.Label>
+                            <Form.Label>Thời gian từ</Form.Label>
                             <Form.Control
                                 autoFocus
                                 type="time"
@@ -149,7 +149,7 @@ export default function CreateMeeting() {
                             />
                         </Form.Group>
                         <Form.Group size="lg" controlId="finishTime">
-                            <Form.Label>to</Form.Label>
+                            <Form.Label>đến</Form.Label>
                             <Form.Control
                                 type="time"
                                 value={m_finishTime}
@@ -157,7 +157,7 @@ export default function CreateMeeting() {
                             />
                         </Form.Group>
                         <Form.Group size="lg" controlId="room">
-                            <Form.Label>Room</Form.Label>
+                            <Form.Label>Chọn phòng họp</Form.Label>
                             <select class="form-control" value={m_room} onChange={(e) => setM_room(e.target.value)}>
                                 {Array.from({ length: rooms.length }).map((_, index) => (
                                     <option key={index}>{rooms[index].title}</option>
@@ -169,12 +169,12 @@ export default function CreateMeeting() {
                 <Button block size="md" type="button" disabled={!validateForm()}
                     style={{ width: "120px", margin: "20px 10px 10px 10px" }} variant="outline-primary"
                     onClick={previous}>
-                    Previous
+                    Trước
                 </Button>
                 <Button block size="md" type="button" disabled={!validateForm()}
                     style={{ width: "120px", margin: "20px 10px 10px 10px" }} variant="outline-primary"
                     onClick={successAlert}>
-                    Create
+                    Tạo
                 </Button>
             </>
         );
