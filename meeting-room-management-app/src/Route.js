@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import Room from "./pages/room.js";
 import Schedule from "./pages/schedule.js";
 import CreateMeeting from "./pages/createMeeting.js";
+import Profile from "./pages/userProfile.js";
 
 
 export default function Routes() {
@@ -27,6 +28,9 @@ export default function Routes() {
             </Route>
             <Route exact path="/createMeeting">
                 <CreateMeeting />
+            </Route>
+            <Route exact path="/profile">
+                <Profile />
             </Route>
         </Switch>
     );
