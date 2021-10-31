@@ -1,4 +1,7 @@
 import '../styles/sidebar.css';
+import { Container, LinkContainer, Nav } from 'react-router-bootstrap';
+import { Navbar } from 'react-bootstrap';
+
 
 const SideBar = () => {
     function isRoom() {
@@ -7,42 +10,34 @@ const SideBar = () => {
 
     return (
         <>
+
             <div class="sidebar-container">
                 <div class="sidebar-logo">
                     <i class="fa fa-bars" aria-hidden="true"></i> MENU
                 </div>
+
                 <ul class="sidebar-navigation">
 
                     <li>
-                        <a href="#">
-                            <i class="fa fa-home" aria-hidden="true"></i> Homepage
+                        <a href="/profile">
+                            <i class="fa fa-users" aria-hidden="true"></i> Hồ sơ cá nhân
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
+                            <i class="fa fa-cog" aria-hidden="true"></i> Cài đặt
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-users" aria-hidden="true"></i> Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-cog" aria-hidden="true"></i> Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> Information
+                            <i class="fa fa-briefcase" aria-hidden="true"></i> Cuộc họp của tôi
                         </a>
                     </li>
                 </ul>
 
                 <hr></hr>
 
-                
+
 
             </div>
 
