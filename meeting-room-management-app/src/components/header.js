@@ -27,23 +27,24 @@ const Header = () => {
                                 activeKey={window.location.pathname}
                             >
                                 <LinkContainer to="/room">
-                                    <Nav.Link href="/room">Room</Nav.Link>
+                                    <Nav.Link href="/room">Phòng</Nav.Link>
                                 </LinkContainer>
                                 <LinkContainer to="/schedule">
-                                    <Nav.Link href="/schedule">Schedule</Nav.Link>
+                                    <Nav.Link href="/schedule">Lịch trình</Nav.Link>
                                 </LinkContainer>
-                                <Container to="/createMeeting">
-                                    <Nav.Link href="/createMeeting">Create meeting</Nav.Link>
-                                </Container>
+                                <LinkContainer to="/createMeeting">
+                                    <Nav.Link href="/createMeeting">Tạo cuộc họp</Nav.Link>
+                                </LinkContainer>
                             </Nav>
                             <Form className="d-flex">
                                 <Nav activeKey={window.location.pathname}>
                                     <LinkContainer to="/signup">
-                                        <Nav.Link>Signup</Nav.Link>
+                                        <Nav.Link>Đăng kí</Nav.Link>
                                     </LinkContainer>
                                     <LinkContainer to="/login">
-                                        <Nav.Link>Login</Nav.Link>
+                                        <Nav.Link>Đăng nhập</Nav.Link>
                                     </LinkContainer>
+                                    
                                 </Nav>
                             </Form>
                         </Navbar.Collapse>
