@@ -7,49 +7,49 @@ class RoomDetail {
     getRoomsDetail() {
         this.rooms = [
             {
-                title: "Room 1",
+                title: "Phòng 1",
                 id: "1",
                 floor: "1",
                 department: "A",
                 area: "50m2",
                 chair: "60",
-                equipments: "project, board, tv, air-conditioner, mic, speaker, water purifier"
+                equipments: "máy chiếu, bảng, tv, điều hòa, mic, loa, cây lọc nước"
             },
             {
-                title: "Room 2",
+                title: "Phòng 2",
                 id: "2",
                 floor: "2",
                 department: "A",
                 area: "60m2",
                 chair: "80",
-                equipments: "project, board, tv, air-conditioner, mic, speaker"
+                equipments: "máy chiếu, bảng, tv, điều hòa, mic, loa"
             },
             {
-                title: "Room 3",
+                title: "Phòng 3",
                 id: "3",
                 floor: "3",
                 department: "A",
                 area: "50m2",
                 chair: "40",
-                equipments: "project, board, tv, air-conditioner, mic, speaker, water purifier, flower vase"
+                equipments: "máy chiếu, bảng, tv, điều hòa, mic, loa, cây lọc nước, lọ hoa"
             },
             {
-                title: "Room 4",
+                title: "Phòng 4",
                 id: "4",
                 floor: "2",
                 department: "B",
                 area: "30m2",
                 chair: "50",
-                equipments: "project, board, air-conditioner, mic, speaker"
+                equipments: "máy chiếu, bảng, điều hòa, mic, loa"
             },
             {
-                title: "Room 5",
+                title: "Phòng 5",
                 id: "5",
                 floor: "3",
                 department: "B",
                 area: "50m2",
                 chair: "100",
-                equipments: "project, board, air-conditioner, mic, speaker"
+                equipments: "máy chiếu, bảng, điều hòa, mic, loa"
             }
 
         ];
