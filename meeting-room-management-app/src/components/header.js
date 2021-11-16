@@ -38,9 +38,6 @@ const Header = () => {
                             </Nav>
                             <Form className="d-flex">
                                 <Nav activeKey={window.location.pathname}>
-                                    <LinkContainer to="/signup">
-                                        <Nav.Link>Đăng kí</Nav.Link>
-                                    </LinkContainer>
                                     <LinkContainer to="/login">
                                         <Nav.Link>Đăng nhập</Nav.Link>
                                     </LinkContainer>
