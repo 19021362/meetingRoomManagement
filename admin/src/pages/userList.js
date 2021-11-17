@@ -2,6 +2,9 @@ import React from 'react';
 import Table from 'react-bootstrap/Table'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Badge } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import "../styles/admin.css";
 
 export default class UserList extends React.Component {
     state = {
@@ -24,10 +27,14 @@ export default class UserList extends React.Component {
         console.log(this.state.users);
         return (
             <>
-
-                <Link to="/newUser">
-                    <button>Tạo tài khoản mới</button>
-                </Link>
+                <h2 style={{textAlign:"center", margin:"20px 0px 0px 0px"}}>Danh sách người dùng</h2>
+                <div class="admin-content">
+                    <div class="admin-content-create">
+                        <Link to="/newUser">
+                            <Button variant="outline-primary">Thêm tài khoản mới</Button>
+                        </Link>
+                    </div>
+                </div>
 
                 <br />
 
@@ -35,7 +42,7 @@ export default class UserList extends React.Component {
                     <thead>
                         <th>#</th>
                         <th>Id</th>
-                        <th>Name</th>
+                        <th>Họ tên</th>
                         <th>Email</th>
 
                     </thead>
@@ -47,6 +54,14 @@ export default class UserList extends React.Component {
                                     <td>{user.user_id}</td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
+                                    <td>
+                                        <Link to="/user">
+                                            <Badge bg="secondary">Sửa</Badge>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Badge bg="danger">Xóa</Badge>
+                                    </td>
                                 </tr>
                             ))
                         }
