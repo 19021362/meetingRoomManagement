@@ -4,6 +4,8 @@ import { Switch, Route } from "react-router-dom";
 import RoomList from "./pages/roomList.js";
 import UserList from "./pages/userList.js";
 import MeetingList from "./pages/meetingList.js";
+import NewUser from "./pages/newUser.js";
+import NewRoom from "./pages/newRoom.js";
 
 
 export default function Routes() {
@@ -23,6 +25,12 @@ export default function Routes() {
             </Route>
             <Route exact path="/meetingList">
                 <MeetingList />
+            </Route>
+            <Route exact path="/newUser">
+                <NewUser />
+            </Route>
+            <Route exact path="/newRoom">
+                <NewRoom />
             </Route>
         </Switch>
     );

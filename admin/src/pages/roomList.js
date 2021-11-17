@@ -1,6 +1,8 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Button from '@restart/ui/esm/Button';
 
 export default class RoomList extends React.Component {
     state = {
@@ -24,7 +26,10 @@ export default class RoomList extends React.Component {
         return (
             <>
 
-                
+                <Link to="/newRoom">
+                    <Button variant="primary">Thêm phòng mới</Button>
+                </Link>
+                <br />
 
                 <Table striped bordered hover size="sm">
                     <thead>
@@ -38,7 +43,7 @@ export default class RoomList extends React.Component {
                         {
                             this.state.rooms.map((room, i) => (
                                 <tr key={i}>
-                                    <td>{i+1}</td>
+                                    <td>{i + 1}</td>
                                     <td>{room.room_id}</td>
                                     <td>{room.title}</td>
                                     <td>{room.infomation}</td>
