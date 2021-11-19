@@ -56,7 +56,7 @@ export default class UserList extends React.Component {
                                     <td>{user.email}</td>
                                     <td>
                                         <Link to="/user">
-                                            <Badge bg="secondary">Sửa</Badge>
+                                            <Badge bg="secondary">Chi tiết</Badge>
                                         </Link>
                                     </td>
                                     <td>

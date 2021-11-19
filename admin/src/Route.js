@@ -6,6 +6,8 @@ import UserList from "./pages/userList.js";
 import MeetingList from "./pages/meetingList.js";
 import NewUser from "./pages/newUser.js";
 import NewRoom from "./pages/newRoom.js";
+import Room from "./pages/room.js";
+import User from "./pages/user.js";
 
 
 export default function Routes() {
@@ -31,6 +33,11 @@ export default function Routes() {
             </Route>
             <Route exact path="/newRoom">
                 <NewRoom />
+            </Route>
+            <Route exact path="/room/:room_id" render={(props) => <Room {...props} />}/>
+    
+            <Route exact path="/user">
+                <User />
             </Route>
         </Switch>
     );

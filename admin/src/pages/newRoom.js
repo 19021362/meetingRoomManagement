@@ -24,7 +24,7 @@ export default function NewRoom() {
     }
 
     const successAlert = () => {
-        alert("Thêm tài khoản mới thành công!");
+        alert("Thêm phòng mới thành công!");
     }
 
     return (

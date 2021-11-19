@@ -8,6 +8,7 @@ import { Form } from "react-bootstrap";
 import { Badge } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import "../styles/admin.css";
+import Room from './room';
 
 export default class RoomList extends React.Component {
     state = {
@@ -15,7 +16,7 @@ export default class RoomList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8000/room/all`)
+        axios.get("http://localhost:8000/room/all")
             .then(res => {
                 const rooms = res.data;
                 this.setState({ rooms });
@@ -25,12 +26,13 @@ export default class RoomList extends React.Component {
 
 
 
+
+
     render() {
 
-        console.log(this.state.rooms);
         return (
             <>
-                <h2 style={{textAlign:"center", margin:"20px 0px 0px 0px"}}>Danh sách phòng họp</h2>
+                <h2 style={{ textAlign: "center", margin: "20px 0px 0px 0px" }}>Danh sách phòng họp</h2>
                 <div class="admin-content">
                     <div class="admin-content-create">
                         <Link to="/newRoom">
@@ -53,13 +55,17 @@ export default class RoomList extends React.Component {
                         {
                             this.state.rooms.map((room, i) => (
                                 <tr key={i}>
+                                    {console.log(room)}
                                     <td>{i + 1}</td>
                                     <td>{room.room_id}</td>
                                     <td>{room.name}</td>
                                     <td>{"tầng " + room.floor + " tòa nhà " + room.department}</td>
                                     <td>
-                                        <Link to="/room">
-                                            <Badge bg="secondary">Sửa</Badge>
+                                        <Link to={{
+                                            pathname: "/room/" + room.room_id,
+                                            state: room
+                                        }}>
+                                            <Badge bg="secondary">Chi tiết</Badge>
                                         </Link>
                                     </td>
                                     <td>

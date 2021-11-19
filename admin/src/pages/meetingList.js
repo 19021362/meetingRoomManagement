@@ -48,7 +48,7 @@ export default class MeetingList extends React.Component {
                                     <td>{meeting.type}</td>
                                     <td>
                                         <Link to="/room">
-                                            <Badge bg="secondary">Sửa</Badge>
+                                            <Badge bg="secondary">Chi tiết</Badge>
                                         </Link>
                                     </td>
                                     <td>
