@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/admin.css";
+import axios from 'axios';
+import { localhost } from "../data/local";
+
+
 const User = props => {
 
   const user = props.location.state;
@@ -21,10 +25,31 @@ const User = props => {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    const updateUser = {
+      password: u_password,
+      name: u_name,
+      address: u_address,
+      title: u_job,
+      isAdmin: u_admin
+    };
+
+    console.log(updateUser);
+
+    axios.put(localhost + '/user/' + u_id, updateUser,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
   }
 
   const successAlert = () => {
-    alert("Thêm tài khoản mới thành công!");
+    alert("Cập nhật tài khoản thành công!");
   }
 
 
@@ -38,7 +63,7 @@ const User = props => {
             <Form.Group size="lg" controlId="u_id">
               <Form.Label>ID</Form.Label>
               <Form.Control
-                disabled = {1}
+                disabled={1}
                 type="text"
                 value={u_id}
                 onChange={(e) => setU_email(e.target.value)}
@@ -47,7 +72,7 @@ const User = props => {
             <Form.Group size="lg" controlId="u_email">
               <Form.Label>Email</Form.Label>
               <Form.Control
-                disabled = {1}
+                disabled={1}
                 type="text"
                 value={u_email}
                 onChange={(e) => setU_email(e.target.value)}
@@ -64,7 +89,7 @@ const User = props => {
 
             <Form.Group size="lg" controlId="u_password">
               <Form.Label>Mật khẩu</Form.Label>
-              <Form.Control                
+              <Form.Control
                 type="text"
                 value={u_password}
                 onChange={(e) => setU_password(e.target.value)}
@@ -92,17 +117,19 @@ const User = props => {
             <Form.Group size="lg" controlId="u_admin">
               <Form.Label>Quản trị viên</Form.Label>
               <select class="form-control" value={u_admin} onChange={(e) => setU_admin(e.target.value)}>
-                <option>Không</option>
-                <option>Có</option>
+                <option value="0">Không</option>
+                <option value="1">Có</option>
               </select>
             </Form.Group>
+
+            <Button block size="md" type="submit" disabled={!validateForm()}
+              style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
+              onClick={successAlert}>
+              Cập nhật
+            </Button>
           </Form>
         </div>
-        <Button block size="md" type="button" disabled={!validateForm()}
-          style={{ width: "120px", margin: "10px 250px 10px 150px" }} variant="outline-info"
-          onClick={successAlert}>
-          Cập nhật
-        </Button>
+
       </div>
     </>
   );

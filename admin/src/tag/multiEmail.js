@@ -104,6 +104,7 @@ export default class MultiEmails extends React.Component {
                     onKeyDown={this.handleKeyDown}
                     onChange={this.handleChange}
                     onPaste={this.handlePaste}
+                    style={{width: "100%", height:"50px"}}
                 />
 
                 {this.state.error && <p className="error">{this.state.error}</p>}

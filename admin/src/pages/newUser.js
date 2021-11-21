@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/admin.css";
+import axios from 'axios';
+import { localhost } from "../data/local";
 
 export default function NewUser() {
 
@@ -10,9 +12,8 @@ export default function NewUser() {
     const [u_password, setU_password] = useState("");
     const [u_job, setU_job] = useState("");
     const [u_address, setU_address] = useState("");
-
     const [u_email, setU_email] = useState("");
-    const [u_admin, setU_admin] = useState("");
+    const [u_admin, setU_admin] = useState("0");
 
     function validateForm() {
         return ((u_email.length > 0) && (u_name.length > 0) && (u_password.length > 0));
@@ -20,6 +21,30 @@ export default function NewUser() {
 
     function handleSubmit(event) {
         event.preventDefault();
+
+        const newUser = {
+            password: u_password,
+            name: u_name,
+            address: u_address,
+            title: u_job,
+            email: u_email,
+            isAdmin: u_admin
+        };
+
+        console.log(newUser);
+
+        axios.post(localhost + '/user', newUser,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+        
+        
     }
 
     const successAlert = () => {
@@ -80,12 +105,12 @@ export default function NewUser() {
                         <Form.Group size="lg" controlId="u_admin">
                             <Form.Label>Quản trị viên</Form.Label>
                             <select class="form-control" value={u_admin} onChange={(e) => setU_admin(e.target.value)}>
-                                <option>Không</option>
-                                <option>Có</option>
+                                <option value="0">Không</option>
+                                <option value="1">Có</option>
                             </select>
                         </Form.Group>
-                        <Button block size="md" type="button" disabled={!validateForm()}
-                            style={{ width: "120px", marginTop: "20px", float: "right" }} variant="outline-success"
+                        <Button block size="md" type="submit" disabled={!validateForm()}
+                            style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-success"
                             onClick={successAlert}>
                             Tạo
                         </Button>

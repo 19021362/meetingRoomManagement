@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/admin.css";
 import axios from 'axios';
-import { localhost } from "../local";
+import { localhost } from "../data/local";
 
 
 export default function NewRoom() {
@@ -14,7 +14,7 @@ export default function NewRoom() {
     const [r_department, setr_department] = useState("");
     const [r_area, setr_area] = useState("");
     const [r_capacity, setr_capacity] = useState("");
-    const [r_status, setr_status] = useState("");
+    const [r_status, setr_status] = useState("1");
     const [r_equipment, setr_equipment] = useState("");
 
     function validateForm() {
@@ -117,14 +117,14 @@ export default function NewRoom() {
 
                         <Form.Group size="lg" controlId="roomStatus">
                             <Form.Label>Tình trạng</Form.Label>
-                            <select class="form-control" value={r_status} onChange={(e) => setr_status(e.target.value)}>
-                                <option>Hoạt động</option>
-                                <option>Bảo trì</option>
+                            <select className="form-control" value={r_status} onChange={(e) => setr_status(e.target.value)}>
+                                <option value="1">Hoạt động</option>
+                                <option value="0">Bảo trì</option>
                             </select>
                         </Form.Group>
 
                         <Button block size="md" type="submit" disabled={!validateForm()}
-                            style={{ width: "120px", float: "right", marginTop: "20px" }} variant="outline-success"
+                            style={{ width: "120px", float: "right", marginTop: "20px", marginBottom: "60px" }} variant="outline-success"
                             onClick={successAlert}>
                             Tạo
                         </Button>

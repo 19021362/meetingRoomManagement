@@ -3,7 +3,8 @@ import Table from 'react-bootstrap/Table'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Badge } from 'react-bootstrap';
-import { localhost } from '../local';
+import { localhost } from '../data/local';
+import { confirmAlert } from 'react-confirm-alert';
 
 export default class MeetingList extends React.Component {
     state = {
@@ -17,6 +18,34 @@ export default class MeetingList extends React.Component {
                 this.setState({ meetings });
             })
             .catch(error => console.log(error));
+    }
+
+    handleDelete(id) {
+        confirmAlert({
+            title: 'Confirm',
+            message: 'Bạn có muốn xóa cuộc họp này không?',
+            buttons: [
+                {
+                    label: 'Có',
+                    onClick: () => {
+                        axios.delete(localhost + '/meeting/' + id)
+                            .then(res => {
+                                console.log(res);
+                                console.log(res.data);
+                            });
+
+                        const meetings = this.state.meetings.filter(meeting => meeting.meeting_id !== id);
+                        this.setState({ meetings });
+                    }
+                },
+                {
+                    label: 'Không',
+                    onClick: () => onclose
+                }
+            ]
+        });
+
+
     }
 
 
@@ -33,8 +62,8 @@ export default class MeetingList extends React.Component {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>ID phòng</th>
-                            <th>Tên phòng</th>
+                            <th>ID cuộc họp</th>
+                            <th>Tên cuộc họp</th>
                             <th>Ngày</th>
                             <th>Loại</th>
                         </tr>
@@ -49,12 +78,15 @@ export default class MeetingList extends React.Component {
                                     <td>{meeting.date}</td>
                                     <td>{meeting.type}</td>
                                     <td>
-                                        <Link to="/room">
+                                        <Link to={{
+                                            pathname: "/meeting/" + meeting.event_id,
+                                            state: meeting
+                                        }}>
                                             <Badge bg="secondary">Chi tiết</Badge>
                                         </Link>
                                     </td>
                                     <td>
-                                        <Badge bg="danger">Xóa</Badge>
+                                        <Badge bg="danger" onClick={() => this.handleDelete(meeting.event_id)}>Xóa</Badge>
                                     </td>
                                 </tr>
                             ))

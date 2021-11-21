@@ -113,7 +113,7 @@ export default function CreateMeeting() {
 
                         <Form.Group size="lg" controlId="parts">
                             <Form.Label>Thêm thành viên</Form.Label>
-                            <MultiEmails
+                            <MultiEmails 
                             />
                         </Form.Group>
                         <Form.Group size="lg" controlId="priority">

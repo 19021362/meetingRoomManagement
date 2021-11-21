@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/admin.css";
 import axios from 'axios';
+import { localhost } from "../data/local";
 
 const Room = props => {
 
@@ -18,11 +19,34 @@ const Room = props => {
   const [r_equipment, setr_equipment] = useState(room.equipment);
 
   function validateForm() {
-    return (r_name.length > 0);
+    return 1;
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    const updateRoom = {
+      name: r_name,
+      floor: r_floor,
+      department: r_department,
+      area: r_area,
+      capacity: r_capacity,
+      equipment: r_equipment,
+      status: r_status
+    };
+
+    console.log(updateRoom);
+
+    axios.put(localhost + '/room/' + r_id, updateRoom,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
   }
 
   const successAlert = () => {
@@ -101,18 +125,17 @@ const Room = props => {
             <Form.Group size="lg" controlId="roomStatus">
               <Form.Label>Tình trạng</Form.Label>
               <select class="form-control" value={r_status} onChange={(e) => setr_status(e.target.value)}>
-                <option>Hoạt động</option>
-                <option>Bảo trì</option>
+                <option value="1">Hoạt động</option>
+                <option value="0">Bảo trì</option>
               </select>
             </Form.Group>
+
+            <Button block size="md" type="submit" disabled={!validateForm()}
+              style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
+              onClick={successAlert}>
+              Cập nhật
+            </Button>
           </Form>
-        </div>
-        <div>
-          <Button block size="md" type="button" disabled={!validateForm()}
-            style={{ width: "120px", margin: "10px 250px 10px 150px", }} variant="outline-info"
-            onClick={successAlert}>
-            Cập nhật
-          </Button>
         </div>
 
       </div>

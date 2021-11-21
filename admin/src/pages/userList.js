@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap';
 import "../styles/admin.css";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { localhost } from '../local';
+import { localhost } from '../data/local';
 
 export default class UserList extends React.Component {
     state = {
@@ -23,7 +23,7 @@ export default class UserList extends React.Component {
             .catch(error => console.log(error));
     }
 
-    handleDelete(id, e) {
+    handleDelete(id) {
         confirmAlert({
             title: 'Confirm',
             message: 'Bạn có muốn xóa tài khoản này không?',
@@ -31,7 +31,7 @@ export default class UserList extends React.Component {
                 {
                     label: 'Có',
                     onClick: () => {
-                        axios.delete(localhost + '/user/${id}')
+                        axios.delete(localhost + '/user/' + id)
                             .then(res => {
                                 console.log(res);
                                 console.log(res.data);
@@ -91,7 +91,7 @@ export default class UserList extends React.Component {
                                         </Link>
                                     </td>
                                     <td>
-                                        <Badge bg="danger" onClick={(e) => this.handleDelete(user.user_id, e)}>Xóa</Badge>
+                                        <Badge bg="danger" onClick={(e) => this.handleDelete(user.user_id)}>Xóa</Badge>
                                     </td>
                                 </tr>
                             ))
