@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/admin.css";
+import axios from 'axios';
+import { localhost } from "../local";
+
 
 export default function NewRoom() {
 
@@ -10,7 +13,6 @@ export default function NewRoom() {
     const [r_floor, setr_floor] = useState("");
     const [r_department, setr_department] = useState("");
     const [r_area, setr_area] = useState("");
-
     const [r_capacity, setr_capacity] = useState("");
     const [r_status, setr_status] = useState("");
     const [r_equipment, setr_equipment] = useState("");
@@ -21,18 +23,45 @@ export default function NewRoom() {
 
     function handleSubmit(event) {
         event.preventDefault();
+
+        const newRoom = {
+            name: r_name,
+            floor: r_floor,
+            department: r_department,
+            area: r_area,
+            capacity: r_capacity,
+            equipment: r_equipment,
+            status: r_status
+        };
+
+        console.log(newRoom);
+
+        axios.post(localhost + '/room', newRoom,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
     }
 
     const successAlert = () => {
+        console.log(r_status);
         alert("Thêm phòng mới thành công!");
+
     }
 
     return (
+
         <>
             <div>
                 <h2 style={{ textAlign: "center", margin: "20px" }}>Tạo phòng mới</h2>
-                <div class="submit-form">
+                <div className="submit-form">
                     <Form onSubmit={handleSubmit}>
+
                         <Form.Group size="lg" controlId="roomName">
                             <Form.Label>Tên phòng</Form.Label>
                             <Form.Control
@@ -78,8 +107,8 @@ export default function NewRoom() {
 
                         <Form.Group size="lg" controlId="roomEquipment">
                             <Form.Label>Trang thiết bị</Form.Label>
-                            <Form.Control as="textarea"
-                                type="textarea" rows={3} style={{height:"70px"}}
+                            <Form.Control
+                                type="textarea" rows={3} style={{ height: "70px" }}
                                 value={r_equipment}
                                 onChange={(e) => setr_equipment(e.target.value)}
                             />
@@ -93,13 +122,16 @@ export default function NewRoom() {
                                 <option>Bảo trì</option>
                             </select>
                         </Form.Group>
+
+                        <Button block size="md" type="submit" disabled={!validateForm()}
+                            style={{ width: "120px", float: "right", marginTop: "20px" }} variant="outline-success"
+                            onClick={successAlert}>
+                            Tạo
+                        </Button>
+
                     </Form>
                 </div>
-                <Button block size="md" type="button" disabled={!validateForm()}
-                    style={{ width: "120px", margin: "10px 250px 10px 150px" }} variant="outline-success"
-                    onClick={successAlert}>
-                    Tạo
-                </Button>
+
             </div>
         </>
     );

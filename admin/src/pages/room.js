@@ -13,7 +13,6 @@ const Room = props => {
   const [r_floor, setr_floor] = useState(room.floor);
   const [r_department, setr_department] = useState(room.department);
   const [r_area, setr_area] = useState(room.area);
-
   const [r_capacity, setr_capacity] = useState(room.capacity);
   const [r_status, setr_status] = useState(room.status);
   const [r_equipment, setr_equipment] = useState(room.equipment);
@@ -36,7 +35,7 @@ const Room = props => {
     <>
       <div>
         <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
-        <div class="submit-form">
+        <div className="submit-form">
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="roomName">
               <Form.Label>ID phòng</Form.Label>
@@ -49,6 +48,7 @@ const Room = props => {
             <Form.Group size="lg" controlId="roomName">
               <Form.Label>Tên phòng</Form.Label>
               <Form.Control
+                autoFocus
                 type="text"
                 value={r_name}
                 onChange={(e) => setR_name(e.target.value)}

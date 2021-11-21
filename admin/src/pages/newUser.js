@@ -29,10 +29,10 @@ export default function NewUser() {
     return (
         <>
             <div>
-                <h2 style={{textAlign:"center", margin:"20px"}}>Tạo tài khoản mới</h2>
-                <div class="submit-form">
+                <h2 style={{ textAlign: "center", margin: "20px" }}>Tạo tài khoản mới</h2>
+                <div className="submit-form">
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group size="lg" controlId="finishTime">
+                        <Form.Group size="lg" controlId="u_email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
                                 type="text"
@@ -40,7 +40,7 @@ export default function NewUser() {
                                 onChange={(e) => setU_email(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group size="lg" controlId="startTime">
+                        <Form.Group size="lg" controlId="u_name">
                             <Form.Label>Họ tên</Form.Label>
                             <Form.Control
                                 autoFocus
@@ -49,8 +49,8 @@ export default function NewUser() {
                                 onChange={(e) => setU_name(e.target.value)}
                             />
                         </Form.Group>
-                    
-                        <Form.Group size="lg" controlId="finishTime">
+
+                        <Form.Group size="lg" controlId="u_password">
                             <Form.Label>Mật khẩu</Form.Label>
                             <Form.Control
                                 type="password"
@@ -58,7 +58,7 @@ export default function NewUser() {
                                 onChange={(e) => setU_password(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group size="lg" controlId="finishTime">
+                        <Form.Group size="lg" controlId="u_title">
                             <Form.Label>Chức vụ</Form.Label>
                             <Form.Control
                                 type="text"
@@ -67,7 +67,7 @@ export default function NewUser() {
                             />
                         </Form.Group>
 
-                        <Form.Group size="lg" controlId="finishTime">
+                        <Form.Group size="lg" controlId="u_address">
                             <Form.Label>Địa chỉ</Form.Label>
                             <Form.Control
                                 type="text"
@@ -77,20 +77,21 @@ export default function NewUser() {
                         </Form.Group>
 
 
-                        <Form.Group size="lg" controlId="room">
+                        <Form.Group size="lg" controlId="u_admin">
                             <Form.Label>Quản trị viên</Form.Label>
                             <select class="form-control" value={u_admin} onChange={(e) => setU_admin(e.target.value)}>
                                 <option>Không</option>
                                 <option>Có</option>
                             </select>
                         </Form.Group>
+                        <Button block size="md" type="button" disabled={!validateForm()}
+                            style={{ width: "120px", marginTop: "20px", float: "right" }} variant="outline-success"
+                            onClick={successAlert}>
+                            Tạo
+                        </Button>
                     </Form>
                 </div>
-                <Button block size="md" type="button" disabled={!validateForm()}
-                    style={{ width: "120px", margin:"10px 250px 10px 150px" }} variant="outline-success"
-                    onClick={successAlert}>
-                    Tạo
-                </Button>
+
             </div>
         </>
     );

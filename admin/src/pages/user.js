@@ -1,98 +1,112 @@
-import React from "preact/compat";
-import "../styles/content.css";
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import "../styles/admin.css";
+const User = props => {
 
+  const user = props.location.state;
+  console.log(user);
 
-class User extends React.Component {
-  render() {
-    return (
-      <>
-        <div class="content-container">
+  const [u_name, setU_name] = useState(user.name);
+  const [u_id, setU_id] = useState(user.user_id);
+  const [u_password, setU_password] = useState(user.password);
+  const [u_job, setU_job] = useState(user.title);
+  const [u_address, setU_address] = useState(user.address);
+  const [u_email, setU_email] = useState(user.email);
+  const [u_admin, setU_admin] = useState(user.isAdmin);
 
-          <div class="container-fluid" style={{ backgroundColor: "lavender" }}>
-
-            <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
-                  <div class="my-4">
-                    <form>
-                      <div class="row mt-5 align-items-center">
-                        <div class="col">
-                          <div class="row align-items-center">
-                            <div class="col-md-7">
-                              <h4 class="mb-1">Brown, Asher</h4>
-
-                            </div>
-                          </div>
-                          <div class="row mb-4">
-                            <div class="col-md-7">
-                              <p class="text-muted">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl ullamcorper, rutrum metus in, congue lectus. In hac habitasse platea dictumst. Cras urna quam, malesuada vitae risus at,
-                                pretium blandit sapien.
-                              </p>
-                            </div>
-                            <div class="col">
-                              <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
-                              <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
-                              <p class="small mb-0 text-muted">(537) 315-1481</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <hr class="my-4" />
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="firstname">Họ và tên</label>
-                          <input type="text" id="firstname" class="form-control" placeholder="Brown Asher" />
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="brown@asher.me" />
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="inputCompany5">Công ty</label>
-                          <input type="text" class="form-control" id="inputCompany5" placeholder="Nec Urna Suscipit Ltd" />
-                        </div>
-                        <div class="form-group col-md-4">
-                          <label for="inputState5">Trụ sở</label>
-                          <select id="inputState5" class="form-control">
-                            <option selected="">Choose...</option>
-                            <option>...</option>
-                          </select>
-                        </div>
-
-                      </div>
-                      <hr class="my-4" />
-                      <div class="row mb-4">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="inputPassword4">Mật khẩu cũ</label>
-                            <input type="password" class="form-control" id="inputPassword5" />
-                          </div>
-                          <div class="form-group">
-                            <label for="inputPassword5">Mật khẩu mới</label>
-                            <input type="password" class="form-control" id="inputPassword5" />
-                          </div>
-                          <div class="form-group">
-                            <label for="inputPassword6">Xác nhận mật khẩu</label>
-                            <input type="password" class="form-control" id="inputPassword6" />
-                          </div>
-                        </div>
-                      </div>
-                      <button type="submit" class="btn btn-primary">Cập nhật</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </>
-    )
+  function validateForm() {
+    return ((u_email.length > 0) && (u_name.length > 0) && (u_password.length > 0));
   }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  const successAlert = () => {
+    alert("Thêm tài khoản mới thành công!");
+  }
+
+
+
+  return (
+    <>
+      <div>
+        <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
+        <div className="submit-form">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group size="lg" controlId="u_id">
+              <Form.Label>ID</Form.Label>
+              <Form.Control
+                disabled = {1}
+                type="text"
+                value={u_id}
+                onChange={(e) => setU_email(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group size="lg" controlId="u_email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                disabled = {1}
+                type="text"
+                value={u_email}
+                onChange={(e) => setU_email(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group size="lg" controlId="u_name">
+              <Form.Label>Họ tên</Form.Label>
+              <Form.Control
+                type="text"
+                value={u_name}
+                onChange={(e) => setU_name(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group size="lg" controlId="u_password">
+              <Form.Label>Mật khẩu</Form.Label>
+              <Form.Control                
+                type="text"
+                value={u_password}
+                onChange={(e) => setU_password(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group size="lg" controlId="u_title">
+              <Form.Label>Chức vụ</Form.Label>
+              <Form.Control
+                type="text"
+                value={u_job}
+                onChange={(e) => setU_job(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group size="lg" controlId="u_address">
+              <Form.Label>Địa chỉ</Form.Label>
+              <Form.Control
+                type="text"
+                value={u_address}
+                onChange={(e) => setU_address(e.target.value)}
+              />
+            </Form.Group>
+
+
+            <Form.Group size="lg" controlId="u_admin">
+              <Form.Label>Quản trị viên</Form.Label>
+              <select class="form-control" value={u_admin} onChange={(e) => setU_admin(e.target.value)}>
+                <option>Không</option>
+                <option>Có</option>
+              </select>
+            </Form.Group>
+          </Form>
+        </div>
+        <Button block size="md" type="button" disabled={!validateForm()}
+          style={{ width: "120px", margin: "10px 250px 10px 150px" }} variant="outline-info"
+          onClick={successAlert}>
+          Cập nhật
+        </Button>
+      </div>
+    </>
+  );
 }
+
 
 export default User;

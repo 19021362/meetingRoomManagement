@@ -35,10 +35,7 @@ export default function Routes() {
                 <NewRoom />
             </Route>
             <Route exact path="/room/:room_id" render={(props) => <Room {...props} />}/>
-    
-            <Route exact path="/user">
-                <User />
-            </Route>
+            <Route exact path="/user/:user_id" render={(props) => <User {...props} />}/>
         </Switch>
     );
 }

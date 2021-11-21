@@ -7,8 +7,11 @@ import { Nav } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Badge } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../styles/admin.css";
 import Room from './room';
+import { localhost } from '../local';
 
 export default class RoomList extends React.Component {
     state = {
@@ -16,7 +19,7 @@ export default class RoomList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8000/room/all")
+        axios.get(localhost + "/room/all")
             .then(res => {
                 const rooms = res.data;
                 this.setState({ rooms });
@@ -25,6 +28,34 @@ export default class RoomList extends React.Component {
     }
 
 
+
+    handleDelete(id) {
+        confirmAlert({
+            title: 'Confirm',
+            message: 'Bạn có muốn xóa phòng này không?',
+            buttons: [
+                {
+                    label: 'Có',
+                    onClick: () => {
+                        axios.delete(localhost + '/room/' + id)
+                            .then(res => {
+                                console.log(res);
+                                console.log(res.data);
+                            });
+
+                        const rooms = this.state.rooms.filter(room => room.room_id !== id);
+                        this.setState({ rooms });
+                    }
+                },
+                {
+                    label: 'Không',
+                    onClick: () => onclose
+                }
+            ]
+        });
+
+
+    }
 
 
 
@@ -45,11 +76,12 @@ export default class RoomList extends React.Component {
 
                 <Table striped bordered hover size="sm">
                     <thead>
-                        <th>#</th>
-                        <th>ID phòng</th>
-                        <th>Tên phòng</th>
-                        <th>Địa chỉ</th>
-
+                        <tr>
+                            <th>#</th>
+                            <th>ID phòng</th>
+                            <th>Tên phòng</th>
+                            <th>Địa chỉ</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {
@@ -69,7 +101,7 @@ export default class RoomList extends React.Component {
                                         </Link>
                                     </td>
                                     <td>
-                                        <Badge bg="danger">Xóa</Badge>
+                                        <Badge bg="danger" onClick={() => this.handleDelete(room.room_id)}>Xóa</Badge>
                                     </td>
                                 </tr>
                             ))

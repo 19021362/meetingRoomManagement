@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Badge } from 'react-bootstrap';
+import { localhost } from '../local';
 
 export default class MeetingList extends React.Component {
     state = {
@@ -10,7 +11,7 @@ export default class MeetingList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8000/meeting/all`)
+        axios.get(localhost + '/meeting/all')
             .then(res => {
                 const meetings = res.data;
                 this.setState({ meetings });
@@ -26,22 +27,23 @@ export default class MeetingList extends React.Component {
         return (
             <>
 
-                <h2 style={{textAlign:"center", margin:"20px 0px 20px 0px"}}>Danh sách cuộc họp</h2>
+                <h2 style={{ textAlign: "center", margin: "20px 0px 20px 0px" }}>Danh sách cuộc họp</h2>
 
                 <Table striped bordered hover size="sm">
                     <thead>
-                        <th>#</th>
-                        <th>ID phòng</th>
-                        <th>Tên phòng</th>
-                        <th>Ngày</th>
-                        <th>Loại</th>
-
+                        <tr>
+                            <th>#</th>
+                            <th>ID phòng</th>
+                            <th>Tên phòng</th>
+                            <th>Ngày</th>
+                            <th>Loại</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {
                             this.state.meetings.map((meeting, i) => (
                                 <tr key={i}>
-                                    <td>{i+1}</td>
+                                    <td>{i + 1}</td>
                                     <td>{meeting.event_id}</td>
                                     <td>{meeting.subject}</td>
                                     <td>{meeting.date}</td>
