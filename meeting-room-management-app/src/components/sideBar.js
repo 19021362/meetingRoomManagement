@@ -1,12 +1,12 @@
 import '../styles/sidebar.css';
 import { Container, LinkContainer, Nav } from 'react-router-bootstrap';
 import { Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { auth } from '../data/auth';
 
 
 const SideBar = () => {
-    function isRoom() {
-        alert(URL.toString)
-    }
+
 
     return (
         <>
@@ -17,12 +17,6 @@ const SideBar = () => {
                 </div>
 
                 <ul class="sidebar-navigation">
-
-                    <li>
-                        <a href="/profile">
-                            <i class="fa fa-users" aria-hidden="true"></i> Hồ sơ cá nhân
-                        </a>
-                    </li>
                     <li>
                         <a href="#">
                             <i class="fa fa-cog" aria-hidden="true"></i> Cài đặt
@@ -34,7 +28,6 @@ const SideBar = () => {
                         </a>
                     </li>
                 </ul>
-
                 <hr></hr>
 
 

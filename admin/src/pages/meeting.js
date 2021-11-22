@@ -35,7 +35,6 @@ const Meeting = props => {
     const fetchRooms = async () => {
       const result = await axios.get(localhost + "/room/all");
       setRooms(result.data);
-
     };
 
     const fetchUsers = async () => {

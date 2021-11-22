@@ -25,36 +25,36 @@ const Schedule = () => {
 
     return (
         <>
-            <SideBar />
 
-            <div class="room-sidebar-container">
+            <div class="sidebar-container">
                 <div class="sidebar-logo">
                     <i class="fa fa-star" aria-hidden="true"></i> Lịch trình
                 </div>
                 <div class="sidebar-navigation">
                     <ul class="sidebar-navigation">
                         <li>
-                            <Button block size="md" type="button" variant="primary" onClick={setMonthView} type="button"
+                            <Button block size="md" type="button" variant="primary" onClick={setMonthView}
                                 style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
                                 <i class="fa fa-circle" aria-hidden="true"></i>
                                 Tháng
                             </Button>
                         </li>
                         <li>
-                            <Button block size="md" type="button" variant="primary" onClick={setWeekView} type="button"
+                            <Button block size="md" type="button" variant="primary" onClick={setWeekView}
                                 style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
                                 <i class="fa fa-circle" aria-hidden="true"></i>
                                 Tuần
                             </Button>
                         </li>
                         <li>
-                            <Button block size="md" type="button" variant="primary" onClick={setCEventsView} type="button"
+                            <Button block size="md" type="button" variant="primary" onClick={setCEventsView}
                                 style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
                                 <i class="fa fa-circle" aria-hidden="true"></i>
                                 Sự kiện sắp tới
                             </Button>
                         </li>
                     </ul>
+                    <hr />
                 </div>
             </div>
 

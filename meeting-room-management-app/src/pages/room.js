@@ -11,42 +11,52 @@ import RoomDetail from '../components/roomDetail.js'
 import '../styles/content.css';
 import '../styles/sidebar.css';
 import { Label } from 'reactstrap';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { localhost } from '../local';
+import axios from 'axios';
 
 
 
 
 const Room = () => {
 
-    const [roomId, setRoomId] = React.useState(0);
+    const [roomId, setRoomId] = useState(0);
 
-    var roomDetail = new RoomDetail();
-    var rooms = roomDetail.getRoomsDetail();
+    const [rooms, setRooms] = useState([]);
+
+
+    useEffect(() => {
+        const fetchRooms = async () => {
+            const result = await axios.get(localhost + "/room/all");
+            setRooms(result.data);
+        };
+
+        fetchRooms();
+    }, []);
 
 
     return (
         <>
-            <SideBar />
-
-
-            <div class="room-sidebar-container">
+            <div class="sidebar-container">
                 <div class="sidebar-logo">
                     <Label onClick={() => setRoomId(0)}>
                         <i class="fa fa-star" aria-hidden="true"></i> Phòng họp
                     </Label>
                 </div>
-                <div class="sidebar-navigation">
-                    <ul class="sidebar-navigation">
-                        {Array.from({ length: rooms.length }).map((_, index) => (
-                            <li>
-                                <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(index + 1)} type="button" key={index}
-                                    style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
-                                    <i class="fa fa-circle" aria-hidden="true"></i>
-                                    {rooms[index].title}
-                                </Button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+
+                <ul class="sidebar-navigation">
+                    {rooms.map((room, index) => (
+                        <li>
+                            <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(index + 1)} key={index}
+                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
+                                <i class="fa fa-circle" aria-hidden="true"></i>
+                                Phòng {room.title}
+                            </Button>
+                        </li>
+                    ))}
+                </ul>
+                <hr></hr>
             </div>
             <div class="content-container">
 
@@ -80,14 +90,15 @@ const Room = () => {
             return (
                 <>
                     <Card>
-                        <Card.Header><h2>{rooms[roomId - 1].title}</h2></Card.Header>
+                        <Card.Header><h2>{"Phòng " + rooms[roomId - 1].title}</h2></Card.Header>
                         <Card.Body>
                             <ul>
                                 <li>Tòa nhà : {rooms[roomId - 1].department}<br /></li>
                                 <li>Tầng : {rooms[roomId - 1].floor}<br /></li>
                                 <li>Diện tích : {rooms[roomId - 1].area}<br /></li>
-                                <li>Sức chứa : {rooms[roomId - 1].chair}<br /></li>
-                                <li>Thiết bị : {rooms[roomId - 1].equipments}<br /></li>
+                                <li>Sức chứa : {rooms[roomId - 1].capacity}<br /></li>
+                                <li>Thiết bị : {rooms[roomId - 1].equipment}<br /></li>
+                                <li>tình trạng : {rooms[roomId - 1].status}<br /></li>
                             </ul>
                         </Card.Body>
                     </Card>

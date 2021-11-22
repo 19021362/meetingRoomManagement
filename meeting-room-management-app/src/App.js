@@ -5,15 +5,18 @@ import './styles/App.css';
 import { LinkContainer } from "react-router-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from 'react-bootstrap';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { React, useEffect, useState } from "react";
+import { Image } from 'react-bootstrap';
+
+const App = () => {
 
 
-function App() {
+
   return (
     <Router>
       <div className="App container py-3">
-        <Header />
-
+        
         <Routes />
 
         <Footer />

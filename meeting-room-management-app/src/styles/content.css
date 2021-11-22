@@ -4,6 +4,12 @@
     background-color: lavender;
 }
 
+.home-content-container {
+    margin: 20px 0px 20px 0px;
+    
+    background-color: lavender;
+}
+
 .col-1 {
     max-width: 200px;
     text-align: center;
