@@ -94,6 +94,9 @@ const Header = () => {
                         <LinkContainer to="/createMeeting">
                             <Nav.Link>Tạo cuộc họp</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/myMeeting">
+                            <Nav.Link>Cuộc họp của tôi</Nav.Link>
+                        </LinkContainer>
                     </Nav>
                     <Form className="d-flex">
                         <Nav>

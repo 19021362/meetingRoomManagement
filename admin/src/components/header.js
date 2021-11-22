@@ -6,7 +6,7 @@ import { Form } from "react-bootstrap";
 import { Button, SplitButton, Dropdown } from "react-bootstrap";
 import { React, useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router";
-import { auth, isLogin, setAuth, setLogin } from "../data/auth";
+import { auth, isLogin, RemoveAuth, setAuth, setLogin } from "../data/auth";
 
 
 const Header = () => {
@@ -15,8 +15,9 @@ const Header = () => {
     const [checkLogin, setCheckLogin] = useState(false);
 
     const logout = () => {
+        RemoveAuth();
         setCheckLogin(false);
-        setLogin(false);
+        
         history.push("/login");
     };
 

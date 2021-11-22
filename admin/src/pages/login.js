@@ -4,9 +4,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/login.css";
 import axios from "axios";
-import { setAuth } from "../data/auth";
+import { SetAuth } from "../data/auth";
 import { localhost } from "../local";
 import { Redirect, useHistory } from "react-router";
+import { isLogin } from "../data/auth";
 
 export default function Login() {
   const history = useHistory();
@@ -34,10 +35,16 @@ export default function Login() {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        setAuth(res.data);
+        const data = res.data;
+        SetAuth(data);
       })
       .then(() => {
-        history.push("/");
+        if (isLogin) {
+          history.push("/");
+        } else {
+          alert("Sai tài khoản hoặc mật khẩu không đúng!");
+          history.push("/login");
+        }
       })
   }
 
