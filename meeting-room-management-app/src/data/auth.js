@@ -1,6 +1,3 @@
-import { localhost } from "../local";
-import axios from "axios";
-import { useHistory } from "react-router";
 
 
 export var auth = {

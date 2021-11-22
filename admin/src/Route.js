@@ -43,9 +43,9 @@ export default function Routes() {
                 <Header />
                 <NewRoom />
             </Route>
-            <Route exact path="/room/:room_id" render={(props) => <Room {...props} />, <Header />} />
-            <Route exact path="/user/:user_id" render={(props) => <User {...props} />, <Header />} />
-            <Route exact path="/meeting/:event_id" render={(props) => <Meeting {...props} />, <Header />} />
+            <Route exact path="/room/:room_id" render={(props) => <Room {...props} />} />
+            <Route exact path="/user/:user_id" render={(props) => <User {...props} />} />
+            <Route exact path="/meeting/:event_id" render={(props) => <Meeting {...props} />} />
         </Switch>
     );
 }

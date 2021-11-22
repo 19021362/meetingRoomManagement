@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import "../styles/admin.css";
+import "../styles/content.css";
 import axios from 'axios';
 import { localhost } from "../local";
 import MultiEmails from "../tag/multiEmail";
 import { useHistory } from "react-router";
+import { auth } from "../data/auth";
 import Header from "../components/header";
 
 
@@ -102,7 +103,6 @@ const Meeting = props => {
   return (
     <>
       <Header />
-
       <div>
 
         <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
@@ -167,7 +167,7 @@ const Meeting = props => {
               <Form.Label>Tổ chức tại phòng</Form.Label>
               <select class="form-control" value={m_roomId} onChange={(e) => setm_roomId(e.target.value)}>
                 {rooms.map((room, index) => (
-                  <option key={index} value={room.room_id}>{room.name}</option>
+                  <option key={index} value={room.room_id}>{room.title}</option>
                 ))}
               </select>
             </Form.Group>

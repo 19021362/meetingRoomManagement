@@ -6,6 +6,8 @@ import Schedule from "./pages/schedule.js";
 import CreateMeeting from "./pages/createMeeting.js";
 import Profile from "./pages/userProfile.js";
 import Header from './components/header.js';
+import MyMeetingList from "./pages/myMeeting.js";
+import Meeting from "./pages/meeting.js";
 
 
 export default function Routes() {
@@ -35,6 +37,11 @@ export default function Routes() {
                 <Header />
                 <Profile />
             </Route>
+            <Route exact path="/myMeeting">
+                <Header />
+                <MyMeetingList />
+            </Route>
+            <Route exact path="/meeting/:event_id" render={(props) => <Meeting {...props} />} />
         </Switch>
     );
 }

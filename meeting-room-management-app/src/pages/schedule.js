@@ -6,10 +6,12 @@ import SideBar from '../components/sideBar'
 import '../styles/content.css';
 import '../styles/sidebar.css';
 import Button from "react-bootstrap/Button";
+import { useState } from 'react';
 
 const Schedule = () => {
 
-    const [viewMode, setViewMode] = React.useState(0);
+    const [viewMode, setViewMode] = useState(0);
+
 
     const setMonthView = () => {
         setViewMode(0);

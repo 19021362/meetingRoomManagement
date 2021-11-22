@@ -5,17 +5,20 @@ import { Link } from 'react-router-dom';
 import { Badge } from 'react-bootstrap';
 import { localhost } from '../local';
 import { confirmAlert } from 'react-confirm-alert';
+import { auth } from '../data/auth';
 
-export default class MeetingList extends React.Component {
+export default class MyMeetingList extends React.Component {
     state = {
         meetings: []
     }
 
     componentDidMount() {
-        axios.get(localhost + '/meeting/all')
+        axios.get(localhost + '/user/' + auth.user_id + '/meetings/initiating')
             .then(res => {
-                const meetings = res.data;
+                const meetings = res.data.data;
+                console.log(meetings);
                 this.setState({ meetings });
+                console.log(this.state.meetings);
             })
             .catch(error => console.log(error));
     }
@@ -46,13 +49,11 @@ export default class MeetingList extends React.Component {
         })
 
 
-    }
+    };
 
 
 
     render() {
-
-        //console.log(this.state.meetings);
         return (
             <>
 
@@ -95,6 +96,6 @@ export default class MeetingList extends React.Component {
                 </Table>
 
             </>
-        )
-    }
+        );
+    };
 }

@@ -5,6 +5,7 @@ import "../styles/admin.css";
 import axios from 'axios';
 import { localhost } from "../local";
 import { useHistory } from "react-router";
+import Header from "../components/header";
 
 const Room = props => {
 
@@ -62,6 +63,7 @@ const Room = props => {
 
   return (
     <>
+      <Header />
       <div>
         <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
         <div className="submit-form">
