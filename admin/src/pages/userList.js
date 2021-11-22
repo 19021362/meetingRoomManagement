@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap';
 import "../styles/admin.css";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { localhost } from '../data/local';
+import { localhost } from '../local';
 
 export default class UserList extends React.Component {
     state = {

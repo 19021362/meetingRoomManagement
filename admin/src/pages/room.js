@@ -3,11 +3,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/admin.css";
 import axios from 'axios';
-import { localhost } from "../data/local";
+import { localhost } from "../local";
+import { useHistory } from "react-router";
 
 const Room = props => {
 
   const room = props.location.state;
+  const history = useHistory();
 
   const [r_name, setR_name] = useState(room.name);
   const [r_id, setr_id] = useState(room.room_id);
@@ -46,6 +48,9 @@ const Room = props => {
       .then(res => {
         console.log(res);
         console.log(res.data);
+      })
+      .then(() => {
+        history.push("/roomList");
       })
   }
 

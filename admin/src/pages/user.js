@@ -3,12 +3,14 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/admin.css";
 import axios from 'axios';
-import { localhost } from "../data/local";
+import { localhost } from "../local";
+import { useHistory } from "react-router";
 
 
 const User = props => {
 
   const user = props.location.state;
+  const history = useHistory();
   console.log(user);
 
   const [u_name, setU_name] = useState(user.name);
@@ -45,6 +47,9 @@ const User = props => {
       .then(res => {
         console.log(res);
         console.log(res.data);
+      })
+      .then(() => {
+        history.push("/userList");
       })
   }
 

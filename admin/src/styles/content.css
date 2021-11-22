@@ -13,6 +13,9 @@
 body{
     color: #8e9194;
     background-color: #f4f6f9;
+    /* background-image: url("https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"); 
+    background-repeat: no-repeat;
+    background-size: cover; */
 }
 .avatar-xl img {
     width: 110px;

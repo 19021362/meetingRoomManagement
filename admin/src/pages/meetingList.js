@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Badge } from 'react-bootstrap';
-import { localhost } from '../data/local';
+import { localhost } from '../local';
 import { confirmAlert } from 'react-confirm-alert';
 
 export default class MeetingList extends React.Component {

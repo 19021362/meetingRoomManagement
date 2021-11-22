@@ -11,7 +11,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../styles/admin.css";
 import Room from './room';
-import { localhost } from '../data/local';
+import { localhost } from '../local';
 
 export default class RoomList extends React.Component {
     state = {

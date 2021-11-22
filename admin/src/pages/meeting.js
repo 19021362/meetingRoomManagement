@@ -4,14 +4,16 @@ import Button from "react-bootstrap/Button";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import "../styles/admin.css";
 import axios from 'axios';
-import { localhost } from "../data/local";
+import { localhost } from "../local";
 import MultiEmails from "../tag/multiEmail";
+import { useHistory } from "react-router";
 
 
 
 const Meeting = props => {
 
   const meeting = props.location.state;
+  const history = useHistory();
   console.log(meeting);
 
   const [m_name, setm_name] = useState(meeting.subject);
@@ -83,6 +85,9 @@ const Meeting = props => {
       .then(res => {
         console.log(res);
         console.log(res.data);
+      })
+      .then(() => {
+        history.push("/meetingList");
       })
   }
 

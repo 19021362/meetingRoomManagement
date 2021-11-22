@@ -9,35 +9,43 @@ import NewRoom from "./pages/newRoom.js";
 import Room from "./pages/room.js";
 import User from "./pages/user.js";
 import Meeting from "./pages/meeting.js";
+import Header from "./components/header.js";
 
 
 export default function Routes() {
     return (
         <Switch>
             <Route exact path="/">
+                <Header />
                 <Home />
             </Route>
             <Route exact path="/login">
+                <Header />
                 <Login />
             </Route>
             <Route exact path="/roomList">
+                <Header />
                 <RoomList />
             </Route>
             <Route exact path="/userList">
+                <Header />
                 <UserList />
             </Route>
             <Route exact path="/meetingList">
+                <Header />
                 <MeetingList />
             </Route>
             <Route exact path="/newUser">
+                <Header />
                 <NewUser />
             </Route>
             <Route exact path="/newRoom">
+                <Header />
                 <NewRoom />
             </Route>
-            <Route exact path="/room/:room_id" render={(props) => <Room {...props} />}/>
-            <Route exact path="/user/:user_id" render={(props) => <User {...props} />}/>
-            <Route exact path="/meeting/:event_id" render={(props) => <Meeting {...props} />}/>
+            <Route exact path="/room/:room_id" render={(props) => <Room {...props} />, <Header />} />
+            <Route exact path="/user/:user_id" render={(props) => <User {...props} />, <Header />} />
+            <Route exact path="/meeting/:event_id" render={(props) => <Meeting {...props} />, <Header />} />
         </Switch>
     );
 }
