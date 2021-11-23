@@ -90,7 +90,7 @@ export default class RoomList extends React.Component {
                                     {console.log(room)}
                                     <td>{i + 1}</td>
                                     <td>{room.room_id}</td>
-                                    <td>{room.name}</td>
+                                    <td>{room.title}</td>
                                     <td>{"tầng " + room.floor + " tòa nhà " + room.department}</td>
                                     <td>
                                         <Link to={{

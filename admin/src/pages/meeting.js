@@ -167,7 +167,7 @@ const Meeting = props => {
               <Form.Label>Tổ chức tại phòng</Form.Label>
               <select class="form-control" value={m_roomId} onChange={(e) => setm_roomId(e.target.value)}>
                 {rooms.map((room, index) => (
-                  <option key={index} value={room.room_id}>{room.name}</option>
+                  <option key={index} value={room.room_id}>{room.title}</option>
                 ))}
               </select>
             </Form.Group>

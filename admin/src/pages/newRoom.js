@@ -28,7 +28,7 @@ export default function NewRoom() {
         event.preventDefault();
 
         const newRoom = {
-            name: r_name,
+            title: r_name,
             floor: r_floor,
             department: r_department,
             area: r_area,

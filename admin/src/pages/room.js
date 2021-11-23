@@ -12,7 +12,7 @@ const Room = props => {
   const room = props.location.state;
   const history = useHistory();
 
-  const [r_name, setR_name] = useState(room.name);
+  const [r_name, setR_name] = useState(room.title);
   const [r_id, setr_id] = useState(room.room_id);
   const [r_floor, setr_floor] = useState(room.floor);
   const [r_department, setr_department] = useState(room.department);
@@ -29,8 +29,8 @@ const Room = props => {
     event.preventDefault();
 
     const updateRoom = {
-      name: r_name,
-      floor: r_floor,
+      title: r_name,
+      floor: r_floor, 
       department: r_department,
       area: r_area,
       capacity: r_capacity,

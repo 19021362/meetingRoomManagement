@@ -24,6 +24,8 @@ export const setLogin = (props) => {
     isLogin = props;
 };
 
+export const EVENTS_CALENDAR = [];
+
 
 
 
