@@ -94,7 +94,6 @@ const Room = () => {
     );
 
     function roomId_0(...p_events) {
-        console.log(p_events);
         return (
             <>
                 <FullCalendar
@@ -112,7 +111,6 @@ const Room = () => {
 
     function roomIdOthers(...p_events) {
         if (roomId > 0) {
-            console.log(p_events);
             return (
                 <>
                     <Card>

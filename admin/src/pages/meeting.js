@@ -15,7 +15,6 @@ const Meeting = props => {
 
   const meeting = props.location.state;
   const history = useHistory();
-  console.log(meeting);
 
   const [m_name, setm_name] = useState(meeting.subject);
   const [m_id, setm_id] = useState(meeting.event_id);
@@ -74,17 +73,11 @@ const Meeting = props => {
       room_id: m_roomId
     };
 
-    console.log(updateMeeting);
-
     axios.put(localhost + '/meeting/' + m_id, updateMeeting,
       {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
       })
       .then(() => {
         history.push("/meetingList");

@@ -85,16 +85,16 @@ const Header = () => {
                         navbarScroll
                         activeKey={window.location.pathname}
                     >
-                        <LinkContainer to="/room">
+                        <LinkContainer to="/room" onClick={() => setCheckLogin(true)}>
                             <Nav.Link>Xem phòng</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/schedule">
+                        <LinkContainer to="/schedule" onClick={() => setCheckLogin(true)}>
                             <Nav.Link>Xem lịch trình</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/createMeeting">
+                        <LinkContainer to="/createMeeting" onClick={() => setCheckLogin(true)}>
                             <Nav.Link>Tạo cuộc họp</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/myMeeting">
+                        <LinkContainer to="/myMeeting" onClick={() => setCheckLogin(true)}>
                             <Nav.Link>Cuộc họp của tôi</Nav.Link>
                         </LinkContainer>
                     </Nav>

@@ -19,11 +19,8 @@ const Schedule = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            //console.log(auth.user_id);
             const result = await axios.get(localhost + '/user/' + auth.user_id + '/meetings/fullcalendar');
-            //console.log(result.data.data);
             setEventList(result.data.data);
-            //console.log(meetings);
         };
        
         fetchEvents();
@@ -81,8 +78,8 @@ const Schedule = () => {
 
             <div class="content-container">
                 <div class="container-fluid" style={{ backgroundColor: "white" }}>
-                    {viewMode === 0 && monthView()}
-                    {viewMode === 1 && weekView()}
+                    {viewMode === 0 && monthView(eventList)}
+                    {viewMode === 1 && weekView(eventList)}
                     {viewMode === 2 && comingEvent()}
 
                 </div>
@@ -93,26 +90,24 @@ const Schedule = () => {
     );
 
 
-    function monthView() {
-        console.log(eventList);
+    function monthView(...p_events) {
         return (
             <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
-                initialEvents={ eventList }
+                initialEvents={ p_events[0] }
                 eventClick={handleEventClick}
             />
         );
 
     };
 
-    function weekView() {
-        console.log(eventList);
+    function weekView(...p_events) {
         return (
             <FullCalendar
                 plugins={[timeGridPlugin]}
                 initialView="timeGridWeek"
-                events={ eventList }
+                events={ p_events[0] }
                 slotMinTime="07:00:00"
                 slotMaxTime="19:00:00"
                 eventClick={handleEventClick}

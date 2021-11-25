@@ -20,7 +20,6 @@ const Home = () => {
         const fetchUser = async () => {
             const result = await axios.get(localhost + "/user/" + auth.user_id);
             SetAuth(result.data);
-            console.log(auth);
         };
 
         fetchUser()

@@ -8,6 +8,7 @@ import { SetAuth } from "../data/auth";
 import { localhost } from "../local";
 import { Redirect, useHistory } from "react-router";
 import { isLogin } from "../data/auth";
+import { participants } from "../data/participant";
 
 export default function Login() {
   const history = useHistory();
@@ -33,8 +34,6 @@ export default function Login() {
         }
       })
       .then(res => {
-        console.log(res);
-        console.log(res.data);
         const data = res.data;
         SetAuth(data);
       })
@@ -50,7 +49,7 @@ export default function Login() {
 
   return (
     <>
-
+      
       <div className="LoginSignup">
         <h2 style={{ textAlign: "center" }}>Đăng nhập</h2>
         <Form onSubmit={handleSubmit}>

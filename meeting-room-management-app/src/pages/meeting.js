@@ -75,20 +75,14 @@ const Meeting = props => {
       room_id: m_roomId
     };
 
-    console.log(updateMeeting);
-
     axios.put(localhost + '/meeting/' + m_id, updateMeeting,
       {
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
       .then(() => {
-        history.push("/meetingList");
+        history.push("/myMeeting");
       })
   }
 
@@ -159,7 +153,7 @@ const Meeting = props => {
             <Form.Group size="lg" controlId="m_piority">
               <Form.Label>Tính chất cuộc họp</Form.Label>
               <select class="form-control" value={m_type} onChange={(e) => setm_type(e.target.value)}>
-                <option value="0">Binhg thường</option>
+                <option value="0">Bình thường</option>
                 <option value="1">Khẩn cấp</option>
               </select>
             </Form.Group>
@@ -168,14 +162,6 @@ const Meeting = props => {
               <select class="form-control" value={m_roomId} onChange={(e) => setm_roomId(e.target.value)}>
                 {rooms.map((room, index) => (
                   <option key={index} value={room.room_id}>{room.title}</option>
-                ))}
-              </select>
-            </Form.Group>
-            <Form.Group size="lg" controlId="m_creator">
-              <Form.Label>Người tổ chức</Form.Label>
-              <select class="form-control" value={m_creatorId} onChange={(e) => setm_creatorId(e.target.value)}>
-                {users.map((user, index) => (
-                  <option key={index} value={user.user_id}>{user.name}</option>
                 ))}
               </select>
             </Form.Group>

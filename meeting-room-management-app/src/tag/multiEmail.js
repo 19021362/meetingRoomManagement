@@ -1,24 +1,33 @@
 import React from "react";
+import { addParticipant, deleteParticipant, setParticipant } from "../data/participant";
 
 export default class MultiEmails extends React.Component {
-    
-    state = {
-        items: [],
-        value: "",
-        error: null
-    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: [],
+            value: "",
+            error: null
+        };
+    }
+
+
+
 
     handleKeyDown = evt => {
         if (["Enter", "Tab", ","].includes(evt.key)) {
             evt.preventDefault();
 
             var value = this.state.value.trim();
-
+            console.log(value);
             if (value && this.isValid(value)) {
+                addParticipant(value);
                 this.setState({
                     items: [...this.state.items, this.state.value],
                     value: ""
                 });
+
             }
         }
     };
@@ -31,9 +40,11 @@ export default class MultiEmails extends React.Component {
     };
 
     handleDelete = item => {
+        deleteParticipant(item);
         this.setState({
             items: this.state.items.filter(i => i !== item)
         });
+
     };
 
     handlePaste = evt => {
@@ -44,7 +55,7 @@ export default class MultiEmails extends React.Component {
 
         if (emails) {
             var toBeAdded = emails.filter(email => !this.isInList(email));
-
+            addParticipant(toBeAdded);
             this.setState({
                 items: [...this.state.items, ...toBeAdded]
             });
@@ -80,7 +91,7 @@ export default class MultiEmails extends React.Component {
     }
 
     render() {
-    
+
         return (
             <>
                 {this.state.items.map(item => (

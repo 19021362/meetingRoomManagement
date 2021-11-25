@@ -33,8 +33,6 @@ export default function Login() {
         }
       })
       .then(res => {
-        console.log(res);
-        console.log(res.data);
         const data = res.data;
         SetAuth(data);
       })

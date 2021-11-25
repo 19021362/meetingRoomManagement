@@ -25,7 +25,6 @@ const Header = () => {
         if(isLogin) {
             setCheckLogin(true);
         }
-        console.log(isLogin)
     });
 
 

@@ -6,6 +6,8 @@ import { Badge } from 'react-bootstrap';
 import { localhost } from '../local';
 import { confirmAlert } from 'react-confirm-alert';
 import { auth } from '../data/auth';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useHistory } from 'react-router';
 
 export default class MyMeetingList extends React.Component {
     state = {
@@ -16,9 +18,7 @@ export default class MyMeetingList extends React.Component {
         axios.get(localhost + '/user/' + auth.user_id + '/meetings/initiating')
             .then(res => {
                 const meetings = res.data.data;
-                console.log(meetings);
                 this.setState({ meetings });
-                console.log(this.state.meetings);
             })
             .catch(error => console.log(error));
     }
@@ -39,6 +39,7 @@ export default class MyMeetingList extends React.Component {
 
                         const meetings = this.state.meetings.filter(meeting => meeting.meeting_id !== id);
                         this.setState({ meetings });
+
                     }
                 },
                 {

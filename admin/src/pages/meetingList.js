@@ -34,7 +34,7 @@ export default class MeetingList extends React.Component {
                                 console.log(res.data);
                             });
 
-                        const meetings = this.state.meetings.filter(meeting => meeting.meeting_id !== id);
+                        const meetings = this.state.meetings.filter(meeting => meeting.event_id !== id);
                         this.setState({ meetings });
                     }
                 },

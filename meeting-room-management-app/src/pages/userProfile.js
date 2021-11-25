@@ -115,15 +115,6 @@ const Profile = props => {
               />
             </Form.Group>
 
-
-            <Form.Group size="lg" controlId="u_admin">
-              <Form.Label>Quản trị viên</Form.Label>
-              <select class="form-control" value={u_admin} onChange={(e) => setU_admin(e.target.value)}>
-                <option value="0">Không</option>
-                <option value="1">Có</option>
-              </select>
-            </Form.Group>
-
             <Button block size="md" type="submit" disabled={!validateForm()}
               style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
               onClick={successAlert}>
