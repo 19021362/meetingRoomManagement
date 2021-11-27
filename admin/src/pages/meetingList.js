@@ -1,29 +1,67 @@
-import React from 'react';
-import Table from 'react-bootstrap/Table'
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
 import { Badge } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import ReactFlexyTable from 'react-flexy-table'
+import 'react-flexy-table/dist/index.css'
 import { localhost } from '../local';
+import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import "../styles/admin.css";
 
-export default class MeetingList extends React.Component {
-    state = {
-        meetings: []
+
+const MeetingList = () => {
+
+
+    const [data, setData] = useState([])
+    const [meetingList, setMeetingList] = useState([])
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+    const fetchData = async () => {
+        const datas = [];
+        const result = await axios.get(localhost + "/meeting/all");
+        setMeetingList(result.data);
+        result.data.map((meeting, index) => {
+            const u = {
+                STT: index + 1,
+                ID: meeting.event_id,
+                Tên: meeting.subject,
+                Ngày_tổ_chức: meeting.date,
+                Loại: meeting.type
+            };
+            datas.push(u);
+        })
+        setData(datas);
     }
+    const additionalCols = [
+        {
+            header: 'Actions',
+            td: (data, index) => {
 
-    componentDidMount() {
-        axios.get(localhost + '/meeting/all')
-            .then(res => {
-                const meetings = res.data;
-                this.setState({ meetings });
-            })
-            .catch(error => console.log(error));
-    }
+                return (
+                    <div>
+                        <Link to={{
+                            pathname: "/meeting/" + data.ID,
+                            state: meetingList[index]
+                        }}>
+                            <Badge bg="secondary">Chi tiết</Badge>
+                        </Link>
+                        <Badge bg="danger" onClick={(e) => handleDelete(data.ID)}>Xóa</Badge>
+                    </div>
+                );
+            }
+        }
+    ]
 
-    handleDelete(id) {
+
+    const handleDelete = (id) => {
         confirmAlert({
             title: 'Confirm',
-            message: 'Bạn có muốn xóa cuộc họp này không?',
+            message: 'Bạn có muốn xóa tài khoản này không?',
             buttons: [
                 {
                     label: 'Có',
@@ -34,8 +72,8 @@ export default class MeetingList extends React.Component {
                                 console.log(res.data);
                             });
 
-                        const meetings = this.state.meetings.filter(meeting => meeting.event_id !== id);
-                        this.setState({ meetings });
+                        const meetings = data.filter(data => data.ID !== id);
+                        setData({ meetings });
                     }
                 },
                 {
@@ -43,58 +81,36 @@ export default class MeetingList extends React.Component {
                     onClick: () => onclose
                 }
             ]
-        })
+        });
+    };
 
+    return (
+        <>
+            <div style={{ marginTop:'20px', marginBottom:"50px" }}>
+                <h2 style={{ textAlign: 'center' }}>Danh sách cuộc họp</h2>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'end'
+                    }}
+                >
+                    <div style={{ margin: 10 }}></div>
+                </div>
 
-    }
+                <ReactFlexyTable
+                    data={data}
+                    pageSize={10}
+                    sortable={true}
+                    filterable={true}
+                    caseSensitive={false}
+                    additionalCols={additionalCols}
+                    showExcelButton
+                    nonFilterCols={["STT"]}
+                    nonSortCols={["STT"]}
+                />
+            </div>
+        </>
+    )
+};
 
-
-
-    render() {
-
-        //console.log(this.state.meetings);
-        return (
-            <>
-
-                <h2 style={{ textAlign: "center", margin: "20px 0px 20px 0px" }}>Danh sách cuộc họp</h2>
-
-                <Table striped bordered hover size="sm">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>ID cuộc họp</th>
-                            <th>Tên cuộc họp</th>
-                            <th>Ngày</th>
-                            <th>Loại</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.meetings.map((meeting, i) => (
-                                <tr key={i}>
-                                    <td>{i + 1}</td>
-                                    <td>{meeting.event_id}</td>
-                                    <td>{meeting.subject}</td>
-                                    <td>{meeting.date}</td>
-                                    <td>{meeting.type}</td>
-                                    <td>
-                                        <Link to={{
-                                            pathname: "/meeting/" + meeting.event_id,
-                                            state: meeting
-                                        }}>
-                                            <Badge bg="secondary">Chi tiết</Badge>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <Badge bg="danger" onClick={() => this.handleDelete(meeting.event_id)}>Xóa</Badge>
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
-
-            </>
-        )
-    }
-}
+export default MeetingList;

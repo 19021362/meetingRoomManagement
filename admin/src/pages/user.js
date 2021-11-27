@@ -22,10 +22,6 @@ const User = props => {
   const [u_email, setU_email] = useState(user.email);
   const [u_admin, setU_admin] = useState(user.isAdmin);
 
-  function validateForm() {
-    return ((u_email.length > 0) && (u_name.length > 0) && (u_password.length > 0));
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -90,6 +86,7 @@ const User = props => {
               <Form.Control
                 type="text"
                 value={u_name}
+                required
                 onChange={(e) => setU_name(e.target.value)}
               />
             </Form.Group>
@@ -99,6 +96,7 @@ const User = props => {
               <Form.Control
                 type="text"
                 value={u_password}
+                required
                 onChange={(e) => setU_password(e.target.value)}
               />
             </Form.Group>
@@ -129,7 +127,7 @@ const User = props => {
               </select>
             </Form.Group>
 
-            <Button block size="md" type="submit" disabled={!validateForm()}
+            <Button block size="md" type="submit"
               style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
               onClick={successAlert}>
               Cập nhật

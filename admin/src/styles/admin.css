@@ -1,6 +1,29 @@
+:root {
+    --rft-main-color: #1E90FF !important;
+    --rft-button-color: #1E90FF !important;
+    --rft-even-row-color: #f3f3f3;
+  }
+
+  ._1OmBB thead th:hover {
+    background-color: #0080FF !important;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
 .admin-content {
-    margin: 20px 0px 20px 0px;
-    float: right;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    
+}
+
+.admin-accordition {
+  margin: 50px 50px 50px 50px;
+  justify-content: center;
+  scroll-behavior: auto;
+  max-height: 300px;
+
+
 }
 
 .submit-form {

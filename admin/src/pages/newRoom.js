@@ -20,9 +20,6 @@ export default function NewRoom() {
     const [r_status, setr_status] = useState("1");
     const [r_equipment, setr_equipment] = useState("");
 
-    function validateForm() {
-        return (r_name.length > 0);
-    }
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -73,6 +70,7 @@ export default function NewRoom() {
                             <Form.Control
                                 autoFocus
                                 type="text"
+                                required
                                 value={r_name}
                                 onChange={(e) => setR_name(e.target.value)}
                             />
@@ -82,6 +80,7 @@ export default function NewRoom() {
                             <Form.Control
                                 type="number"
                                 value={r_floor}
+                                required
                                 onChange={(e) => setr_floor(e.target.value)}
                             />
                         </Form.Group>
@@ -90,6 +89,7 @@ export default function NewRoom() {
                             <Form.Control
                                 type="text"
                                 value={r_department}
+                                required
                                 onChange={(e) => setr_department(e.target.value)}
                             />
                         </Form.Group>
@@ -129,7 +129,7 @@ export default function NewRoom() {
                             </select>
                         </Form.Group>
 
-                        <Button block size="md" type="submit" disabled={!validateForm()}
+                        <Button block size="md" type="submit"
                             style={{ width: "120px", float: "right", marginTop: "20px", marginBottom: "60px" }} variant="outline-success"
                             onClick={successAlert}>
                             Tạo

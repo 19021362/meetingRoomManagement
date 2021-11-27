@@ -1,38 +1,66 @@
-import React from 'react';
-import Table from 'react-bootstrap/Table'
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Nav } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import React, { useState, useEffect } from 'react'
 import { Badge } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import ReactFlexyTable from 'react-flexy-table'
+import 'react-flexy-table/dist/index.css'
+import { localhost } from '../local';
+import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../styles/admin.css";
-import Room from './room';
-import { localhost } from '../local';
 
-export default class RoomList extends React.Component {
-    state = {
-        rooms: []
+
+const RoomList = () => {
+
+
+    const [data, setData] = useState([])
+    const [roomList, setRoomList] = useState([])
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+    const fetchData = async () => {
+        const datas = [];
+        const result = await axios.get(localhost + "/room/all");
+        setRoomList(result.data);
+        result.data.map((room, index) => {
+            const u = {
+                STT: index + 1,
+                ID: room.room_id,
+                Tên: "Phòng " + room.title,
+                Địa_chỉ : "Tầng " + room.floor + " tòa " + room.department 
+            };
+            datas.push(u);
+        })
+        setData(datas);
     }
+    const additionalCols = [
+        {
+            header: 'Actions',
+            td: (data, index) => {
 
-    componentDidMount() {
-        axios.get(localhost + "/room/all")
-            .then(res => {
-                const rooms = res.data;
-                this.setState({ rooms });
-            })
-            .catch(error => console.log(error));
-    }
+                return (
+                    <div>
+                        <Link to={{
+                            pathname: "/room/" + data.ID,
+                            state: roomList[index]
+                        }}>
+                            <Badge bg="secondary">Chi tiết</Badge>
+                        </Link>
+                        <Badge bg="danger" onClick={(e) => handleDelete(data.ID)}>Xóa</Badge>
+                    </div>
+                );
+            }
+        }
+    ]
 
 
-
-    handleDelete(id) {
+    const handleDelete = (id) => {
         confirmAlert({
             title: 'Confirm',
-            message: 'Bạn có muốn xóa phòng này không?',
+            message: 'Bạn có muốn xóa tài khoản này không?',
             buttons: [
                 {
                     label: 'Có',
@@ -43,8 +71,8 @@ export default class RoomList extends React.Component {
                                 console.log(res.data);
                             });
 
-                        const rooms = this.state.rooms.filter(room => room.room_id !== id);
-                        this.setState({ rooms });
+                        const rooms = data.filter(data => data.ID !== id);
+                        setData({ rooms });
                     }
                 },
                 {
@@ -53,63 +81,39 @@ export default class RoomList extends React.Component {
                 }
             ]
         });
+    };
 
-
-    }
-
-
-
-    render() {
-
-        return (
-            <>
-                <h2 style={{ textAlign: "center", margin: "20px 0px 0px 0px" }}>Danh sách phòng họp</h2>
-                <div class="admin-content">
-                    <div class="admin-content-create">
+    return (
+        <>
+            <div style={{ marginTop:'20px', marginBottom:"50px" }}>
+                <h2 style={{ textAlign: 'center' }}>Danh sách phòng họp</h2>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'end'
+                    }}
+                >
+                    <div style={{ margin: 10 }}>
                         <Link to="/newRoom">
-                            <Button variant="outline-primary">Thêm phòng mới</Button>
+                            <Button variant="outline-primary">Thêm phòng họp mới</Button>
                         </Link>
                     </div>
                 </div>
 
-                <br />
+                <ReactFlexyTable
+                    data={data}
+                    pageSize={10}
+                    sortable={true}
+                    filterable={true}
+                    caseSensitive={false}
+                    additionalCols={additionalCols}
+                    showExcelButton
+                    nonFilterCols={["STT"]}
+                    nonSortCols={["STT"]}
+                />
+            </div>
+        </>
+    )
+};
 
-                <Table striped bordered hover size="sm">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>ID phòng</th>
-                            <th>Tên phòng</th>
-                            <th>Địa chỉ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.rooms.map((room, i) => (
-                                <tr key={i}>
-                                    {console.log(room)}
-                                    <td>{i + 1}</td>
-                                    <td>{room.room_id}</td>
-                                    <td>{room.title}</td>
-                                    <td>{"tầng " + room.floor + " tòa nhà " + room.department}</td>
-                                    <td>
-                                        <Link to={{
-                                            pathname: "/room/" + room.room_id,
-                                            state: room
-                                        }}>
-                                            <Badge bg="secondary">Chi tiết</Badge>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <Badge bg="danger" onClick={() => this.handleDelete(room.room_id)}>Xóa</Badge>
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
-
-            </>
-        )
-    }
-}
+export default RoomList;

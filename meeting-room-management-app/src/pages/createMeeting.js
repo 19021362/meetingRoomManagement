@@ -23,8 +23,8 @@ export default function CreateMeeting() {
     const [m_date, setM_date] = useState("");
     const [m_startTime, setM_startTime] = useState("");
     const [m_finishTime, setM_finishTime] = useState("");
-    const [m_room, setM_room] = useState("");
-    const [m_priority, setM_priority] = useState("")
+    const [m_room, setM_room] = useState(1);
+    const [m_priority, setM_priority] = useState("NORMAL")
 
     const [resourceList, setResource] = useState([]);
     const [eventList, setEvent] = useState([]);
@@ -120,8 +120,6 @@ export default function CreateMeeting() {
 
         alert("Tạo cuộc họp mới thành công!");
 
-        //postParticipant();
-
         history.push("/createMeeting");
     };
 
@@ -197,10 +195,6 @@ export default function CreateMeeting() {
                     />
                 </Form.Group>
 
-                <Form.Group size="lg" controlId="parts">
-                    <Form.Label>Thêm thành viên</Form.Label>
-                    <MultiEmails />
-                </Form.Group>
                 <Form.Group size="lg" controlId="priority">
                     <Form.Label>Mức độ ưu tiên</Form.Label>
                     <Form.Control as="select" value={m_priority} onChange={(e) => setM_priority(e.target.value)}>
@@ -249,6 +243,11 @@ export default function CreateMeeting() {
                             <option key={index} value={room.id}>{room.title}</option>
                         ))}
                     </Form.Control>
+                </Form.Group>
+
+                <Form.Group size="lg" controlId="parts">
+                    <Form.Label>Thêm thành viên</Form.Label>
+                    <MultiEmails />
                 </Form.Group>
 
                 <Button block size="md" type="button"

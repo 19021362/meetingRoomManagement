@@ -10,6 +10,8 @@ import Room from "./pages/room.js";
 import User from "./pages/user.js";
 import Meeting from "./pages/meeting.js";
 import Header from "./components/header.js";
+import { isLogin } from "./data/auth.js";
+import { Redirect } from "react-router";
 
 
 export default function Routes() {

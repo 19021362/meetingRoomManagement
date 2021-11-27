@@ -63,13 +63,6 @@ const Schedule = () => {
                                 Tuần
                             </Button>
                         </li>
-                        <li>
-                            <Button block size="md" type="button" variant="primary" onClick={setCEventsView}
-                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
-                                <i class="fa fa-circle" aria-hidden="true"></i>
-                                Sự kiện sắp tới
-                            </Button>
-                        </li>
                     </ul>
                     <hr />
                 </div>
@@ -80,7 +73,6 @@ const Schedule = () => {
                 <div class="container-fluid" style={{ backgroundColor: "white" }}>
                     {viewMode === 0 && monthView(eventList)}
                     {viewMode === 1 && weekView(eventList)}
-                    {viewMode === 2 && comingEvent()}
 
                 </div>
             </div>
@@ -117,11 +109,6 @@ const Schedule = () => {
         );
     };
 
-    function comingEvent() {
-        return (
-            <h1>Coming events!</h1>
-        );
-    };
 
     
 

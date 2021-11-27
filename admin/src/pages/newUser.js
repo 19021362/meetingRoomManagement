@@ -18,9 +18,6 @@ export default function NewUser() {
     const [u_email, setU_email] = useState("");
     const [u_admin, setU_admin] = useState("0");
 
-    function validateForm() {
-        return ((u_email.length > 0) && (u_name.length > 0) && (u_password.length > 0));
-    }
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -68,6 +65,7 @@ export default function NewUser() {
                             <Form.Control
                                 type="text"
                                 value={u_email}
+                                required
                                 onChange={(e) => setU_email(e.target.value)}
                             />
                         </Form.Group>
@@ -77,6 +75,7 @@ export default function NewUser() {
                                 autoFocus
                                 type="text"
                                 value={u_name}
+                                required
                                 onChange={(e) => setU_name(e.target.value)}
                             />
                         </Form.Group>
@@ -86,6 +85,7 @@ export default function NewUser() {
                             <Form.Control
                                 type="password"
                                 value={u_password}
+                                required
                                 onChange={(e) => setU_password(e.target.value)}
                             />
                         </Form.Group>
@@ -115,7 +115,7 @@ export default function NewUser() {
                                 <option value="1">Có</option>
                             </select>
                         </Form.Group>
-                        <Button block size="md" type="submit" disabled={!validateForm()}
+                        <Button block size="md" type="submit"
                             style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-success"
                             onClick={successAlert}>
                             Tạo

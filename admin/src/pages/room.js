@@ -82,6 +82,7 @@ const Room = props => {
                 autoFocus
                 type="text"
                 value={r_name}
+                required
                 onChange={(e) => setR_name(e.target.value)}
               />
             </Form.Group>
@@ -90,6 +91,7 @@ const Room = props => {
               <Form.Control
                 type="number"
                 value={r_floor}
+                required
                 onChange={(e) => setr_floor(e.target.value)}
               />
             </Form.Group>
@@ -98,6 +100,7 @@ const Room = props => {
               <Form.Control
                 type="text"
                 value={r_department}
+                required
                 onChange={(e) => setr_department(e.target.value)}
               />
             </Form.Group>
