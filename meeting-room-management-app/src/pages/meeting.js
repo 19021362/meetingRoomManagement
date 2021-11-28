@@ -9,7 +9,8 @@ import MultiEmails from "../tag/multiEmail";
 import { useHistory } from "react-router";
 import { auth } from "../data/auth";
 import Header from "../components/header";
-
+import { isLogin } from "../data/auth";
+import { Redirect } from "react-router";
 
 
 const Meeting = props => {
@@ -96,96 +97,105 @@ const Meeting = props => {
 
   return (
     <>
-      <Header />
-      <div>
-
-        <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
-        <div className="submit-form">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group size="lg" controlId="m_id">
-              <Form.Label>ID</Form.Label>
-              <Form.Control
-                disabled={1}
-                type="text"
-                value={m_id}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="u_name">
-              <Form.Label>Chủ đề</Form.Label>
-              <Form.Control
-                type="text"
-                value={m_name}
-                onChange={(e) => setm_name(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="m_decs">
-              <Form.Label>Mô tả</Form.Label>
-              <Form.Control
-                type="text"
-                value={m_desc}
-                onChange={(e) => setm_desc(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="m_date">
-              <Form.Label>Ngày tổ chức</Form.Label>
-              <Form.Control
-                type="date"
-                value={m_date}
-                onChange={(e) => setm_date(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="m_starttime">
-              <Form.Label>từ giờ</Form.Label>
-              <Form.Control
-                type="time"
-                value={m_Stime}
-                onChange={(e) => setm_Stime(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="m_endtime">
-              <Form.Label>đến giờ</Form.Label>
-              <Form.Control
-                type="time"
-                value={m_Etime}
-                onChange={(e) => setm_Etime(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="m_piority">
-              <Form.Label>Tính chất cuộc họp</Form.Label>
-              <select class="form-control" value={m_type} onChange={(e) => setm_type(e.target.value)} disabled>
-                <option value="0">Bình thường</option>
-                <option value="1">Khẩn cấp</option>
-              </select>
-            </Form.Group>
-            <Form.Group size="lg" controlId="m_room">
-              <Form.Label>Tổ chức tại phòng</Form.Label>
-              <select class="form-control" value={m_roomId} onChange={(e) => setm_roomId(e.target.value)}>
-                {rooms.map((room, index) => (
-                  <option key={index} value={room.room_id}>{room.title}</option>
-                ))}
-              </select>
-            </Form.Group>
-            <div>
-              <Form.Label>Người tham dự</Form.Label>
-              <ListGroup>
-                {participants.map((user) => (
-                  <ListGroup.Item as="li">{user.email}</ListGroup.Item>
-                ))}
-              </ListGroup>
-            </div>
-
-
-            <Button block size="md" type="submit" disabled={!validateForm()}
-              style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
-              onClick={successAlert}>
-              Cập nhật
-            </Button>
-          </Form>
-        </div>
-
-      </div>
+      {isLogin && meetingRender()}
+      {!isLogin && (<Redirect to="/login" />)}
     </>
   );
+
+  function meetingRender() {
+    return (
+      <>
+        <Header />
+        <div>
+
+          <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
+          <div className="submit-form">
+            <Form onSubmit={handleSubmit}>
+              <Form.Group size="lg" controlId="m_id">
+                <Form.Label>ID</Form.Label>
+                <Form.Control
+                  disabled={1}
+                  type="text"
+                  value={m_id}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="u_name">
+                <Form.Label>Chủ đề</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={m_name}
+                  onChange={(e) => setm_name(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="m_decs">
+                <Form.Label>Mô tả</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={m_desc}
+                  onChange={(e) => setm_desc(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="m_date">
+                <Form.Label>Ngày tổ chức</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={m_date}
+                  onChange={(e) => setm_date(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="m_starttime">
+                <Form.Label>từ giờ</Form.Label>
+                <Form.Control
+                  type="time"
+                  value={m_Stime}
+                  onChange={(e) => setm_Stime(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="m_endtime">
+                <Form.Label>đến giờ</Form.Label>
+                <Form.Control
+                  type="time"
+                  value={m_Etime}
+                  onChange={(e) => setm_Etime(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="m_piority">
+                <Form.Label>Tính chất cuộc họp</Form.Label>
+                <select class="form-control" value={m_type} onChange={(e) => setm_type(e.target.value)} disabled>
+                  <option value="0">Bình thường</option>
+                  <option value="1">Khẩn cấp</option>
+                </select>
+              </Form.Group>
+              <Form.Group size="lg" controlId="m_room">
+                <Form.Label>Tổ chức tại phòng</Form.Label>
+                <select class="form-control" value={m_roomId} onChange={(e) => setm_roomId(e.target.value)}>
+                  {rooms.map((room, index) => (
+                    <option key={index} value={room.room_id}>{room.title}</option>
+                  ))}
+                </select>
+              </Form.Group>
+              <div>
+                <Form.Label>Người tham dự</Form.Label>
+                <ListGroup>
+                  {participants.map((user) => (
+                    <ListGroup.Item as="li">{user.email}</ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </div>
+
+
+              <Button block size="md" type="submit" disabled={!validateForm()}
+                style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
+                onClick={successAlert}>
+                Cập nhật
+              </Button>
+            </Form>
+          </div>
+
+        </div>
+      </>
+    );
+  }
 }
 
 

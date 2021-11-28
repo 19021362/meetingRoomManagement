@@ -11,6 +11,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../styles/admin.css";
 import { isLogin } from '../data/auth';
 import { useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 
 const UserList = () => {
 
@@ -87,35 +88,44 @@ const UserList = () => {
 
     return (
         <>
-            <div style={{ marginTop: '20px', marginBottom: "50px" }}>
-                <h2 style={{ textAlign: 'center' }}>Danh sách người dùng</h2>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'end'
-                    }}
-                >
-                    <div style={{ margin: 10 }}>
-                        <Link to="/newUser">
-                            <Button variant="outline-primary">Thêm tài Khoản mới</Button>
-                        </Link>
-                    </div>
-                </div>
-
-                <ReactFlexyTable
-                    data={data}
-                    pageSize={10}
-                    sortable={true}
-                    filterable={true}
-                    caseSensitive={false}
-                    additionalCols={additionalCols}
-                    showExcelButton
-                    nonFilterCols={["STT"]}
-                    nonSortCols={["STT"]}
-                />
-            </div>
+            {isLogin && userListRender()}
+            {!isLogin && (<Redirect to="/login" />)}
         </>
     );
+
+    function userListRender() {
+        return (
+            <>
+                <div style={{ marginTop: '20px', marginBottom: "50px" }}>
+                    <h2 style={{ textAlign: 'center' }}>Danh sách người dùng</h2>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'end'
+                        }}
+                    >
+                        <div style={{ margin: 10 }}>
+                            <Link to="/newUser">
+                                <Button variant="outline-primary">Thêm tài Khoản mới</Button>
+                            </Link>
+                        </div>
+                    </div>
+
+                    <ReactFlexyTable
+                        data={data}
+                        pageSize={10}
+                        sortable={true}
+                        filterable={true}
+                        caseSensitive={false}
+                        additionalCols={additionalCols}
+                        showExcelButton
+                        nonFilterCols={["STT"]}
+                        nonSortCols={["STT"]}
+                    />
+                </div>
+            </>
+        );
+    }
 };
 
 export default UserList;

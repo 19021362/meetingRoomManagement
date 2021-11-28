@@ -5,7 +5,7 @@
       position: fixed;
     max-width: 320px;
     max-height: 75%;
-    min-width: 280px;    
+    min-width: 250px;    
     overflow-x: hidden;
     overflow-y: auto;
     background:lavender;
@@ -18,7 +18,7 @@
 .Crm-form form {
       margin: 0 auto;
       max-width: 320px;
-      
+      min-width: 300px;
     }
 
 

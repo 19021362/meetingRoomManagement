@@ -6,6 +6,8 @@ import axios from 'axios';
 import { localhost } from "../local";
 import { useHistory } from "react-router";
 import Header from "../components/header";
+import { Redirect } from "react-router";
+import { isLogin } from "../data/auth";
 
 const Room = props => {
 
@@ -30,7 +32,7 @@ const Room = props => {
 
     const updateRoom = {
       title: r_name,
-      floor: r_floor, 
+      floor: r_floor,
       department: r_department,
       area: r_area,
       capacity: r_capacity,
@@ -63,94 +65,104 @@ const Room = props => {
 
   return (
     <>
-      <Header />
-      <div>
-        <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
-        <div className="submit-form">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group size="lg" controlId="roomName">
-              <Form.Label>ID phòng</Form.Label>
-              <Form.Control
-                disabled={1}
-                type="text"
-                value={r_id}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="roomName">
-              <Form.Label>Tên phòng</Form.Label>
-              <Form.Control
-                autoFocus
-                type="text"
-                value={r_name}
-                required
-                onChange={(e) => setR_name(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="roomfloor">
-              <Form.Label>Tầng</Form.Label>
-              <Form.Control
-                type="number"
-                value={r_floor}
-                required
-                onChange={(e) => setr_floor(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="roomDepartment">
-              <Form.Label>Tòa</Form.Label>
-              <Form.Control
-                type="text"
-                value={r_department}
-                required
-                onChange={(e) => setr_department(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="roomCapacity">
-              <Form.Label>Sức chứa</Form.Label>
-              <Form.Control
-                type="number"
-                value={r_capacity}
-                onChange={(e) => setr_capacity(e.target.value)}
-              />
-            </Form.Group>
+      {isLogin && roomRender()}
+      {!isLogin && (<Redirect to="/login" />)}
 
-            <Form.Group size="lg" controlId="roomArea">
-              <Form.Label>Diện tích</Form.Label>
-              <Form.Control
-                type="number"
-                value={r_area}
-                onChange={(e) => setr_area(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group size="lg" controlId="roomEquipment">
-              <Form.Label>Trang thiết bị</Form.Label>
-              <Form.Control as="textarea"
-                type="textarea" rows={3} style={{ height: "70px" }}
-                value={r_equipment}
-                onChange={(e) => setr_equipment(e.target.value)}
-              />
-            </Form.Group>
-
-
-            <Form.Group size="lg" controlId="roomStatus">
-              <Form.Label>Tình trạng</Form.Label>
-              <select class="form-control" value={r_status} onChange={(e) => setr_status(e.target.value)}>
-                <option value="1">Hoạt động</option>
-                <option value="0">Bảo trì</option>
-              </select>
-            </Form.Group>
-
-            <Button block size="md" type="submit" disabled={!validateForm()}
-              style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
-              onClick={successAlert}>
-              Cập nhật
-            </Button>
-          </Form>
-        </div>
-
-      </div>
     </>
   );
+
+  function roomRender() {
+    return (
+      <>
+        <Header />
+        <div>
+          <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
+          <div className="submit-form">
+            <Form onSubmit={handleSubmit}>
+              <Form.Group size="lg" controlId="roomName">
+                <Form.Label>ID phòng</Form.Label>
+                <Form.Control
+                  disabled={1}
+                  type="text"
+                  value={r_id}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="roomName">
+                <Form.Label>Tên phòng</Form.Label>
+                <Form.Control
+                  autoFocus
+                  type="text"
+                  value={r_name}
+                  required
+                  onChange={(e) => setR_name(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="roomfloor">
+                <Form.Label>Tầng</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={r_floor}
+                  required
+                  onChange={(e) => setr_floor(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="roomDepartment">
+                <Form.Label>Tòa</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={r_department}
+                  required
+                  onChange={(e) => setr_department(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="roomCapacity">
+                <Form.Label>Sức chứa</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={r_capacity}
+                  onChange={(e) => setr_capacity(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group size="lg" controlId="roomArea">
+                <Form.Label>Diện tích</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={r_area}
+                  onChange={(e) => setr_area(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group size="lg" controlId="roomEquipment">
+                <Form.Label>Trang thiết bị</Form.Label>
+                <Form.Control as="textarea"
+                  type="textarea" rows={3} style={{ height: "70px" }}
+                  value={r_equipment}
+                  onChange={(e) => setr_equipment(e.target.value)}
+                />
+              </Form.Group>
+
+
+              <Form.Group size="lg" controlId="roomStatus">
+                <Form.Label>Tình trạng</Form.Label>
+                <select class="form-control" value={r_status} onChange={(e) => setr_status(e.target.value)}>
+                  <option value="1">Hoạt động</option>
+                  <option value="0">Bảo trì</option>
+                </select>
+              </Form.Group>
+
+              <Button block size="md" type="submit" disabled={!validateForm()}
+                style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
+                onClick={successAlert}>
+                Cập nhật
+              </Button>
+            </Form>
+          </div>
+
+        </div>
+      </>
+    );
+  }
 };
 
 export default Room;

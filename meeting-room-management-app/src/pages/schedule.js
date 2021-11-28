@@ -10,7 +10,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from "axios";
 import { localhost } from '../local';
-import { auth } from '../data/auth';
+import { auth, isLogin } from '../data/auth';
+import { Redirect } from 'react-router';
 
 const Schedule = () => {
 
@@ -22,7 +23,7 @@ const Schedule = () => {
             const result = await axios.get(localhost + '/user/' + auth.user_id + '/meetings/fullcalendar');
             setEventList(result.data.data);
         };
-       
+
         fetchEvents();
     }, []);
 
@@ -42,44 +43,50 @@ const Schedule = () => {
 
     return (
         <>
-
-            <div class="sidebar-container">
-                <div class="sidebar-logo">
-                    <i class="fa fa-star" aria-hidden="true"></i> Lịch trình
-                </div>
-                <div class="sidebar-navigation">
-                    <ul class="sidebar-navigation">
-                        <li>
-                            <Button block size="md" type="button" variant="primary" onClick={setMonthView}
-                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
-                                <i class="fa fa-circle" aria-hidden="true"></i>
-                                Tháng
-                            </Button>
-                        </li>
-                        <li>
-                            <Button block size="md" type="button" variant="primary" onClick={setWeekView}
-                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
-                                <i class="fa fa-circle" aria-hidden="true"></i>
-                                Tuần
-                            </Button>
-                        </li>
-                    </ul>
-                    <hr />
-                </div>
-            </div>
-
-
-            <div class="content-container">
-                <div class="container-fluid" style={{ backgroundColor: "white" }}>
-                    {viewMode === 0 && monthView(eventList)}
-                    {viewMode === 1 && weekView(eventList)}
-
-                </div>
-            </div>
-
-
+            {isLogin && scheduleRender()}
+            {!isLogin && (<Redirect to="/login" />)}
         </>
     );
+
+    function scheduleRender() {
+        return (
+            <>
+                <div class="sidebar-container">
+                    <div class="sidebar-logo">
+                        <i class="fa fa-star" aria-hidden="true"></i> Lịch trình
+                    </div>
+                    <div class="sidebar-navigation">
+                        <ul class="sidebar-navigation">
+                            <li>
+                                <Button block size="md" type="button" variant="primary" onClick={setMonthView}
+                                    style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
+                                    <i class="fa fa-circle" aria-hidden="true"></i>
+                                    Tháng
+                                </Button>
+                            </li>
+                            <li>
+                                <Button block size="md" type="button" variant="primary" onClick={setWeekView}
+                                    style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", borderRadius: "0%", textAlign: "left" }}>
+                                    <i class="fa fa-circle" aria-hidden="true"></i>
+                                    Tuần
+                                </Button>
+                            </li>
+                        </ul>
+                        <hr />
+                    </div>
+                </div>
+
+
+                <div class="content-container">
+                    <div class="container-fluid" style={{ backgroundColor: "white" }}>
+                        {viewMode === 0 && monthView(eventList)}
+                        {viewMode === 1 && weekView(eventList)}
+
+                    </div>
+                </div>
+            </>
+        );
+    }
 
 
     function monthView(...p_events) {
@@ -87,7 +94,7 @@ const Schedule = () => {
             <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
-                initialEvents={ p_events[0] }
+                initialEvents={p_events[0]}
                 eventClick={handleEventClick}
             />
         );
@@ -99,18 +106,18 @@ const Schedule = () => {
             <FullCalendar
                 plugins={[timeGridPlugin]}
                 initialView="timeGridWeek"
-                events={ p_events[0] }
+                events={p_events[0]}
                 slotMinTime="07:00:00"
                 slotMaxTime="19:00:00"
                 eventClick={handleEventClick}
-                
-                
+
+
             />
         );
     };
 
 
-    
+
 
 
     function renderEventContent(eventInfo) {

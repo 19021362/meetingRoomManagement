@@ -9,6 +9,8 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../styles/admin.css";
+import { Redirect } from 'react-router';
+import { isLogin } from '../data/auth';
 
 
 const RoomList = () => {
@@ -30,7 +32,7 @@ const RoomList = () => {
                 STT: index + 1,
                 ID: room.room_id,
                 Tên: "Phòng " + room.title,
-                Địa_chỉ : "Tầng " + room.floor + " tòa " + room.department 
+                Địa_chỉ: "Tầng " + room.floor + " tòa " + room.department
             };
             datas.push(u);
         })
@@ -60,7 +62,7 @@ const RoomList = () => {
     const handleDelete = (id) => {
         confirmAlert({
             title: 'Confirm',
-            message: 'Bạn có muốn xóa tài khoản này không?',
+            message: 'Bạn có muốn xóa phòng này không?',
             buttons: [
                 {
                     label: 'Có',
@@ -85,35 +87,44 @@ const RoomList = () => {
 
     return (
         <>
-            <div style={{ marginTop:'20px', marginBottom:"50px" }}>
-                <h2 style={{ textAlign: 'center' }}>Danh sách phòng họp</h2>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'end'
-                    }}
-                >
-                    <div style={{ margin: 10 }}>
-                        <Link to="/newRoom">
-                            <Button variant="outline-primary">Thêm phòng họp mới</Button>
-                        </Link>
-                    </div>
-                </div>
-
-                <ReactFlexyTable
-                    data={data}
-                    pageSize={10}
-                    sortable={true}
-                    filterable={true}
-                    caseSensitive={false}
-                    additionalCols={additionalCols}
-                    showExcelButton
-                    nonFilterCols={["STT"]}
-                    nonSortCols={["STT"]}
-                />
-            </div>
+            {isLogin && roomListRender()}
+            {!isLogin && (<Redirect to="/login" />)}
         </>
-    )
+    );
+
+    function roomListRender() {
+        return (
+            <>
+                <div style={{ marginTop: '20px', marginBottom: "50px" }}>
+                    <h2 style={{ textAlign: 'center' }}>Danh sách phòng họp</h2>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'end'
+                        }}
+                    >
+                        <div style={{ margin: 10 }}>
+                            <Link to="/newRoom">
+                                <Button variant="outline-primary">Thêm phòng họp mới</Button>
+                            </Link>
+                        </div>
+                    </div>
+
+                    <ReactFlexyTable
+                        data={data}
+                        pageSize={10}
+                        sortable={true}
+                        filterable={true}
+                        caseSensitive={false}
+                        additionalCols={additionalCols}
+                        showExcelButton
+                        nonFilterCols={["STT"]}
+                        nonSortCols={["STT"]}
+                    />
+                </div>
+            </>
+        );
+    }
 };
 
 export default RoomList;

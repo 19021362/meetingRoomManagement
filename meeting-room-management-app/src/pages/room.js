@@ -13,6 +13,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { localhost } from '../local';
 import axios from 'axios';
+import Feedback from '../tag/feedback';
+import { isLogin } from '../data/auth';
+import { Redirect } from 'react-router';
 
 
 
@@ -22,6 +25,7 @@ const Room = () => {
     const [roomId, setRoomId] = useState();
 
     const [rooms, setRooms] = useState([]);
+    const [roomIdFeedback, setRoomIdFeedback] = useState();
     const [resourceList, setResource] = useState([]);
     const [eventList, setEvent] = useState([]);
 
@@ -56,42 +60,60 @@ const Room = () => {
 
     return (
         <>
-            <div class="sidebar-container">
-                <div class="sidebar-logo">
-                    <Label>
-                        <i class="fa fa-star" aria-hidden="true"></i> Phòng họp
-                    </Label>
-                </div>
-
-                <ul class="sidebar-navigation">
-                    <li>
-                        <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(0)}
-                            style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", textAlign: "left" }}>
-                            <i class="fa fa-circle" aria-hidden="true"></i><strong>Tất cả phòng</strong>
-                        </Button>
-                    </li>
-                    {rooms.map((room, index) => (
-                        <li>
-
-                            <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(index + 1)} key={index}
-                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", textAlign: "left" }}>
-                                <i class="fa fa-circle" aria-hidden="true"></i>
-                                Phòng {room.title}
-                            </Button>
-                        </li>
-                    ))}
-                </ul>
-                <hr></hr>
-            </div>
-            <div class="content-container">
-
-                <div class="container-fluid" style={{ backgroundColor: "white" }}>
-                    {roomId === 0 && roomId_0(eventList)}
-                    {roomIdOthers(eventList)}
-                </div>
-            </div>
+            {isLogin && roomRender()}
+            {!isLogin && (<Redirect to="/login" />)}
         </>
     );
+
+    function roomRender() {
+        return (
+            <>
+                <div class="sidebar-container">
+                    <div class="sidebar-logo">
+                        <Label>
+                            <i class="fa fa-star" aria-hidden="true"></i> Phòng họp
+                        </Label>
+                    </div>
+
+                    <ul class="sidebar-navigation">
+                        <li>
+                            <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(0)}
+                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", textAlign: "left" }}>
+                                <i class="fa fa-circle" aria-hidden="true"></i><strong>Tất cả phòng</strong>
+                            </Button>
+                        </li>
+                        {rooms.map((room, index) => (
+                            <li>
+
+                                <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(index + 1)} key={index}
+                                    style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", textAlign: "left" }}>
+                                    <i class="fa fa-circle" aria-hidden="true"></i>
+                                    Phòng {room.title}
+                                </Button>
+                            </li>
+                        ))}
+                    </ul>
+                    <hr />
+                    <ul class="sidebar-navigation">
+                        <li>
+                            <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(-1)}
+                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", textAlign: "left" }}>
+                                <i class="fa fa-circle" aria-hidden="true"></i><strong>Gửi đánh giá</strong>
+                            </Button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-container">
+
+                    <div class="container-fluid" style={{ backgroundColor: "white" }}>
+                        {roomId === 0 && roomId_0(eventList)}
+                        {roomIdOthers(eventList)}
+                        {roomId === -1 && (<Feedback />)}
+                    </div>
+                </div>
+            </>
+        );
+    }
 
     function roomId_0(...p_events) {
         return (
@@ -149,7 +171,9 @@ const Room = () => {
                 </>
             );
         }
-    }
+    };
+
+
 
 
 };

@@ -9,6 +9,8 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../styles/admin.css";
+import { Redirect } from 'react-router';
+import { isLogin } from '../data/auth';
 
 
 const MeetingList = () => {
@@ -61,7 +63,7 @@ const MeetingList = () => {
     const handleDelete = (id) => {
         confirmAlert({
             title: 'Confirm',
-            message: 'Bạn có muốn xóa tài khoản này không?',
+            message: 'Bạn có muốn xóa cuộc họp này không?',
             buttons: [
                 {
                     label: 'Có',
@@ -86,31 +88,40 @@ const MeetingList = () => {
 
     return (
         <>
-            <div style={{ marginTop:'20px', marginBottom:"50px" }}>
-                <h2 style={{ textAlign: 'center' }}>Danh sách cuộc họp</h2>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'end'
-                    }}
-                >
-                    <div style={{ margin: 10 }}></div>
-                </div>
-
-                <ReactFlexyTable
-                    data={data}
-                    pageSize={10}
-                    sortable={true}
-                    filterable={true}
-                    caseSensitive={false}
-                    additionalCols={additionalCols}
-                    showExcelButton
-                    nonFilterCols={["STT"]}
-                    nonSortCols={["STT"]}
-                />
-            </div>
+            {isLogin && meetingListRender()}
+            {!isLogin && (<Redirect to="/login" />)}
         </>
     )
+
+    function meetingListRender() {
+        return (
+            <>
+                <div style={{ marginTop: '20px', marginBottom: "50px" }}>
+                    <h2 style={{ textAlign: 'center' }}>Danh sách cuộc họp</h2>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'end'
+                        }}
+                    >
+                        <div style={{ margin: 10 }}></div>
+                    </div>
+
+                    <ReactFlexyTable
+                        data={data}
+                        pageSize={10}
+                        sortable={true}
+                        filterable={true}
+                        caseSensitive={false}
+                        additionalCols={additionalCols}
+                        showExcelButton
+                        nonFilterCols={["STT"]}
+                        nonSortCols={["STT"]}
+                    />
+                </div>
+            </>
+        );
+    }
 };
 
 export default MeetingList;

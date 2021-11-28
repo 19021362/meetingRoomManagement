@@ -4,7 +4,8 @@ import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import { localhost } from "../local";
 import { useHistory } from "react-router";
-import { auth } from "../data/auth";
+import { auth, isLogin } from "../data/auth";
+import { Redirect } from "react-router";
 
 
 const Profile = props => {
@@ -58,74 +59,85 @@ const Profile = props => {
 
   return (
     <>
-      <div>
-        <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
-        <div className="submit-form">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group size="lg" controlId="u_id">
-              <Form.Label>ID</Form.Label>
-              <Form.Control
-                disabled={1}
-                type="text"
-                value={u_id}
-                onChange={(e) => setU_email(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="u_email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                disabled={1}
-                type="text"
-                value={u_email}
-                onChange={(e) => setU_email(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="u_name">
-              <Form.Label>Họ tên</Form.Label>
-              <Form.Control
-                type="text"
-                value={u_name}
-                onChange={(e) => setU_name(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group size="lg" controlId="u_password">
-              <Form.Label>Mật khẩu</Form.Label>
-              <Form.Control
-                type="text"
-                value={u_password}
-                onChange={(e) => setU_password(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="u_title">
-              <Form.Label>Chức vụ</Form.Label>
-              <Form.Control
-                type="text"
-                value={u_job}
-                onChange={(e) => setU_job(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group size="lg" controlId="u_address">
-              <Form.Label>Địa chỉ</Form.Label>
-              <Form.Control
-                type="text"
-                value={u_address}
-                onChange={(e) => setU_address(e.target.value)}
-              />
-            </Form.Group>
-
-            <Button block size="md" type="submit" disabled={!validateForm()}
-              style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
-              onClick={successAlert}>
-              Cập nhật
-            </Button>
-          </Form>
-        </div>
-
-      </div>
+      {isLogin && userProfile()}
+      {!isLogin && (<Redirect to="/login" />)}
     </>
   );
+
+  function userProfile() {
+    return (
+      <>
+        <div>
+          <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
+          <div className="submit-form">
+            <Form onSubmit={handleSubmit}>
+              <Form.Group size="lg" controlId="u_id">
+                <Form.Label>ID</Form.Label>
+                <Form.Control
+                  disabled={1}
+                  type="text"
+                  value={u_id}
+                  onChange={(e) => setU_email(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="u_email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  disabled={1}
+                  type="text"
+                  value={u_email}
+                  onChange={(e) => setU_email(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="u_name">
+                <Form.Label>Họ tên</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={u_name}
+                  onChange={(e) => setU_name(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group size="lg" controlId="u_password">
+                <Form.Label>Mật khẩu</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={u_password}
+                  onChange={(e) => setU_password(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="u_title">
+                <Form.Label>Chức vụ</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={u_job}
+                  onChange={(e) => setU_job(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group size="lg" controlId="u_address">
+                <Form.Label>Địa chỉ</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={u_address}
+                  onChange={(e) => setU_address(e.target.value)}
+                />
+              </Form.Group>
+
+              <Button block size="md" type="submit" disabled={!validateForm()}
+                style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
+                onClick={successAlert}>
+                Cập nhật
+              </Button>
+            </Form>
+          </div>
+
+        </div>
+      </>
+    );
+
+
+  }
 }
 
 

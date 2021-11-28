@@ -16,6 +16,8 @@ import Login from './login';
 import { Redirect } from 'react-router';
 import { Accordion, Button } from 'react-bootstrap';
 import "../styles/admin.css";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 ChartJS.register(
     CategoryScale,
@@ -31,7 +33,7 @@ export const options = {
     plugins: {
         title: {
             display: true,
-            text: 'Biểu đồ tần suất sử dụng phòng trong 1 tháng',
+            text: 'Biểu đồ tần suất sử dụng phòng',
         },
     },
 };
@@ -39,40 +41,92 @@ export const options = {
 const Home = () => {
 
     const [roomLabel, setRoomLabel] = useState([]);
+    const [feedbacks, setFeedback] = useState([]);
+    const [freqData, setFreqData] = useState([]);
 
-
-    const [data, setData] = useState([]);
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            const labels = [];
-            const result = await axios.get(localhost + "/room/all");
-            //setData(result.data);
-
-            result.data.map((room, index) => {
-                const label = room.title;
-                labels.push(label);
-            });
-            setRoomLabel(labels);
-        };
-
         fetchData();
+        fetchFeedback();
     }, []);
+
+    const fetchData = async () => {
+        const labels = [];
+        const freqs = [];
+        const result = await axios.get(localhost + "/room/all/frequency");
+        console.log(result.data);
+        result.data.map((room, index) => {
+            const label = room.lable;
+            labels.push(label);
+            const freq = room.freq;
+            freqs.push(freq);
+        });
+        console.log(labels);
+        console.log(freqs);
+        setRoomLabel(labels);
+        setFreqData(freqs);
+    };
+
+    const fetchFeedback = async () => {
+        const result = await axios.get(localhost + "/feedback/all");
+        setFeedback(result.data);
+    };
 
     const dataSet = {
         labels: roomLabel,
         datasets: [
             {
                 label: "lần sử dụng",
-                data: [4, 5, 9, 2, 10],
+                data: freqData,
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
             }
         ]
     };
 
-    const approveFeedback = () => {
-        alert("đã phê duyệt")
+    const approveFeedback = (fb) => {
+
+        const updateFb = {
+            room_id: fb.room_id,
+            feedback: fb.feedback,
+            isApprove: 1
+        }
+
+        axios.put(localhost + "/feedback/" + fb.feedback_id, updateFb,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+        alert("đã phê duyệt");
+
+        setFeedback(feedbacks.filter(_fb => _fb !== fb))
+    };
+
+    const deleteFeedback = (id) => {
+        confirmAlert({
+            title: 'Confirm',
+            message: 'Bạn có muốn xóa phản hồi này không?',
+            buttons: [
+                {
+                    label: 'Có',
+                    onClick: () => {
+                        axios.delete(localhost + '/feedback/' + id)
+                            .then(res => {
+                                console.log(res);
+                                console.log(res.data);
+                            });
+                        setFeedback(feedbacks.filter(fb => fb.feedback_id != id));
+
+                    }
+                },
+                {
+                    label: 'Không',
+                    onClick: () => onclose
+                }
+            ]
+        });
     };
 
 
@@ -90,22 +144,24 @@ const Home = () => {
                     <div className="admin-accordition">
                         <h2>phản hồi của người dùng</h2>
                         <Accordion flush>
-                            <Accordion.Item eventKey="0">
-                                <Accordion.Header>Accordion Item #1</Accordion.Header>
-                                <Accordion.Body>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                        est laborum.
-                                    </p>
-                                    <Button variant="outline-primary" style={{ margin: "0px 10px 0px 0px" }} onClick={approveFeedback}>
-                                        Phê duyệt
-                                    </Button>
-                                </Accordion.Body>
-                            </Accordion.Item>
+                            {
+                                feedbacks.map((fb, index) => (
+                                    <Accordion.Item eventKey={index}>
+                                        <Accordion.Header>{fb.room_name}</Accordion.Header>
+                                        <Accordion.Body>
+                                            <p>{fb.feedback}</p>
+                                            <Button variant="outline-primary" style={{ margin: "0px 10px 0px 0px" }}
+                                                onClick={(e) => approveFeedback( fb )}>
+                                                Phê duyệt
+                                            </Button>
+                                            <Button variant="outline-danger" style={{ margin: "0px 10px 0px 0px" }}
+                                                onClick={(e) => deleteFeedback(fb.feedback_id)}>
+                                                Xóa
+                                            </Button>
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                ))
+                            }
                         </Accordion>
                         <hr />
                     </div>

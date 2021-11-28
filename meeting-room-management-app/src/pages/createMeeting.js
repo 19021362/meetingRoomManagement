@@ -13,6 +13,8 @@ import { localhost } from "../local.js";
 import { useHistory } from "react-router";
 import { auth } from "../data/auth.js";
 import { participants, removeParticipant } from "../data/participant.js";
+import { Redirect } from "react-router";
+import { isLogin } from "../data/auth.js";
 
 export default function CreateMeeting() {
 
@@ -99,7 +101,7 @@ export default function CreateMeeting() {
                 }
                 console.log(error.config);
             });
-        
+
         console.log(res.data.event_id);
 
         successAlert();
@@ -142,25 +144,34 @@ export default function CreateMeeting() {
 
     return (
         <>
-            <div className="Crm-form">
-                <div><h3>Tạo cuộc họp mới!</h3></div>
-                <div class="Name-form">
-                    <Form id="form-1">
-                        {formStep === 0 && fstep1()}
-                    </Form>
-                    <Form id="form-2">
-                        {formStep === 1 && fstep2()}
-                    </Form>
-                </div>
-
-            </div>
-
-            <div class="Crm-content">
-                {formStep === 0 && cstep1(userEventList)}
-                {formStep === 1 && cstep2(eventList)}
-            </div>
+            {isLogin && creatMeetingRender()}
+            {!isLogin && (<Redirect to="/login" />)}
         </>
     );
+
+    function creatMeetingRender() {
+        return (
+            <>
+                <div className="Crm-form">
+                    <div><h3>Tạo cuộc họp mới!</h3></div>
+                    <div class="Name-form">
+                        <Form id="form-1">
+                            {formStep === 0 && fstep1()}
+                        </Form>
+                        <Form id="form-2">
+                            {formStep === 1 && fstep2()}
+                        </Form>
+                    </div>
+
+                </div>
+
+                <div class="Crm-content">
+                    {formStep === 0 && cstep1(userEventList)}
+                    {formStep === 1 && cstep2(eventList)}
+                </div>
+            </>
+        );
+    }
 
     function fstep1() {
         return (
@@ -190,6 +201,7 @@ export default function CreateMeeting() {
                     <Form.Label>Thêm mô tả</Form.Label>
                     <Form.Control as="textarea"
                         type="textarea" row="3"
+                        style={{ minHeight: "100px" }}
                         value={m_desc}
                         onChange={(e) => setM_desc(e.target.value)}
                     />
@@ -238,7 +250,7 @@ export default function CreateMeeting() {
                 </Form.Group>
                 <Form.Group size="lg" controlId="room">
                     <Form.Label>Chọn phòng họp</Form.Label>
-                    <Form.Control as="select" value={m_room} onChange={(e) => {setM_room(e.target.value); console.log(e.target.value)}}>
+                    <Form.Control as="select" value={m_room} onChange={(e) => { setM_room(e.target.value); console.log(e.target.value) }}>
                         {resourceList.map((room, index) => (
                             <option key={index} value={room.id}>{room.title}</option>
                         ))}

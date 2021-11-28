@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { Badge } from 'react-bootstrap';
 import { localhost } from '../local';
 import { confirmAlert } from 'react-confirm-alert';
-import { auth } from '../data/auth';
+import { auth, isLogin } from '../data/auth';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { useHistory } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 
 export default class MyMeetingList extends React.Component {
     state = {
@@ -55,6 +55,7 @@ export default class MyMeetingList extends React.Component {
 
 
     render() {
+        if(isLogin) {
         return (
             <>
 
@@ -97,6 +98,10 @@ export default class MyMeetingList extends React.Component {
                 </Table>
 
             </>
-        );
+        );} else {
+            return(
+                <Redirect to="/login" />
+            );
+        }
     };
 }

@@ -1,5 +1,3 @@
-
-
 import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
 import { useEffect } from 'react';

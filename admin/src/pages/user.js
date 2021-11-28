@@ -6,6 +6,8 @@ import axios from 'axios';
 import { localhost } from "../local";
 import { useHistory } from "react-router";
 import Header from "../components/header";
+import { Redirect } from "react-router";
+import { isLogin } from "../data/auth";
 
 
 const User = props => {
@@ -58,86 +60,97 @@ const User = props => {
 
   return (
     <>
-      <Header />
-      <div>
-        <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
-        <div className="submit-form">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group size="lg" controlId="u_id">
-              <Form.Label>ID</Form.Label>
-              <Form.Control
-                disabled={1}
-                type="text"
-                value={u_id}
-                onChange={(e) => setU_email(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="u_email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                disabled={1}
-                type="text"
-                value={u_email}
-                onChange={(e) => setU_email(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="u_name">
-              <Form.Label>Họ tên</Form.Label>
-              <Form.Control
-                type="text"
-                value={u_name}
-                required
-                onChange={(e) => setU_name(e.target.value)}
-              />
-            </Form.Group>
+      {isLogin && userRender()}
+      {!isLogin && (<Redirect to="/login" />)}
 
-            <Form.Group size="lg" controlId="u_password">
-              <Form.Label>Mật khẩu</Form.Label>
-              <Form.Control
-                type="text"
-                value={u_password}
-                required
-                onChange={(e) => setU_password(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="u_title">
-              <Form.Label>Chức vụ</Form.Label>
-              <Form.Control
-                type="text"
-                value={u_job}
-                onChange={(e) => setU_job(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group size="lg" controlId="u_address">
-              <Form.Label>Địa chỉ</Form.Label>
-              <Form.Control
-                type="text"
-                value={u_address}
-                onChange={(e) => setU_address(e.target.value)}
-              />
-            </Form.Group>
-
-
-            <Form.Group size="lg" controlId="u_admin">
-              <Form.Label>Quản trị viên</Form.Label>
-              <select class="form-control" value={u_admin} onChange={(e) => setU_admin(e.target.value)}>
-                <option value="0">Không</option>
-                <option value="1">Có</option>
-              </select>
-            </Form.Group>
-
-            <Button block size="md" type="submit"
-              style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
-              onClick={successAlert}>
-              Cập nhật
-            </Button>
-          </Form>
-        </div>
-
-      </div>
     </>
   );
+
+
+  function userRender() {
+    return (
+      <>
+        <Header />
+        <div>
+          <h2 style={{ textAlign: "center", margin: "20px" }}>Chi tiết thông tin</h2>
+          <div className="submit-form">
+            <Form onSubmit={handleSubmit}>
+              <Form.Group size="lg" controlId="u_id">
+                <Form.Label>ID</Form.Label>
+                <Form.Control
+                  disabled={1}
+                  type="text"
+                  value={u_id}
+                  onChange={(e) => setU_email(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="u_email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  disabled={1}
+                  type="text"
+                  value={u_email}
+                  onChange={(e) => setU_email(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="u_name">
+                <Form.Label>Họ tên</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={u_name}
+                  required
+                  onChange={(e) => setU_name(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group size="lg" controlId="u_password">
+                <Form.Label>Mật khẩu</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={u_password}
+                  required
+                  onChange={(e) => setU_password(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group size="lg" controlId="u_title">
+                <Form.Label>Chức vụ</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={u_job}
+                  onChange={(e) => setU_job(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group size="lg" controlId="u_address">
+                <Form.Label>Địa chỉ</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={u_address}
+                  onChange={(e) => setU_address(e.target.value)}
+                />
+              </Form.Group>
+
+
+              <Form.Group size="lg" controlId="u_admin">
+                <Form.Label>Quản trị viên</Form.Label>
+                <select class="form-control" value={u_admin} onChange={(e) => setU_admin(e.target.value)}>
+                  <option value="0">Không</option>
+                  <option value="1">Có</option>
+                </select>
+              </Form.Group>
+
+              <Button block size="md" type="submit"
+                style={{ width: "120px", marginTop: "20px", float: "right", marginBottom: "60px" }} variant="outline-info"
+                onClick={successAlert}>
+                Cập nhật
+              </Button>
+            </Form>
+          </div>
+
+        </div>
+      </>
+    );
+  }
 }
 
 
