@@ -73,6 +73,7 @@ export default function NewUser() {
                             <Form.Group size="lg" controlId="u_email">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
+                                    autoFocus
                                     type="text"
                                     value={u_email}
                                     required
@@ -82,7 +83,7 @@ export default function NewUser() {
                             <Form.Group size="lg" controlId="u_name">
                                 <Form.Label>Họ tên</Form.Label>
                                 <Form.Control
-                                    autoFocus
+
                                     type="text"
                                     value={u_name}
                                     required

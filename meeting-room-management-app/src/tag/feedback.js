@@ -7,7 +7,7 @@ import { Form, Button } from "react-bootstrap";
 const Feedback = () => {
 
     const [rooms, setRooms] = useState([]);
-    const [roomId, setRoomId] = useState();
+    const [roomId, setRoomId] = useState("1");
     const [feedback, setFeedback] = useState("");
 
     useEffect(() => {

@@ -11,22 +11,24 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import "../styles/admin.css";
 import { Redirect } from 'react-router';
 import { isLogin } from '../data/auth';
+import { SetRooms } from '../data/data';
 
 
 const RoomList = () => {
 
 
-    const [data, setData] = useState([])
-    const [roomList, setRoomList] = useState([])
+    const [data, setData] = useState([]);
+    const [roomList, setRoomList] = useState([]);
 
     useEffect(() => {
         fetchData();
-    }, [])
+    },[]);
 
     const fetchData = async () => {
         const datas = [];
         const result = await axios.get(localhost + "/room/all");
         setRoomList(result.data);
+        SetRooms(result.data);
         result.data.map((room, index) => {
             const u = {
                 STT: index + 1,
@@ -37,20 +39,51 @@ const RoomList = () => {
             datas.push(u);
         })
         setData(datas);
-    }
+    };
+
+    const columns = [
+        {
+            header: 'STT',
+            key: 'STT',
+        },
+        {
+            header: 'Tên',
+            key: 'Tên'
+        },
+        {
+            header: 'Địa chỉ',
+            key: 'Địa_chỉ'
+        },
+        {
+            header: 'Thao tác',
+            //key: 'action',
+            td: (data, index) =>
+                <div>
+                    <Link to={{
+                        pathname: "/room/" + data.ID,
+                        state: data.ID
+                    }}>
+                        <Badge bg="secondary">Chi tiết</Badge>
+                    </Link>{' '}
+                    <Badge bg="danger" onClick={(e) => handleDelete(data.ID)}>Xóa</Badge>
+                </div>
+
+        }
+    ];
+
     const additionalCols = [
         {
-            header: 'Actions',
+            header: 'Thao tác',
             td: (data, index) => {
 
                 return (
                     <div>
                         <Link to={{
                             pathname: "/room/" + data.ID,
-                            state: roomList[index]
+                            state: data.ID
                         }}>
                             <Badge bg="secondary">Chi tiết</Badge>
-                        </Link>
+                        </Link>{' '}
                         <Badge bg="danger" onClick={(e) => handleDelete(data.ID)}>Xóa</Badge>
                     </div>
                 );
@@ -59,9 +92,10 @@ const RoomList = () => {
     ]
 
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
+        console.log(id);
         confirmAlert({
-            title: 'Confirm',
+            title: 'Xác nhận',
             message: 'Bạn có muốn xóa phòng này không?',
             buttons: [
                 {
@@ -74,7 +108,7 @@ const RoomList = () => {
                             });
 
                         const rooms = data.filter(data => data.ID !== id);
-                        setData({ rooms });
+                        setData(rooms)
                     }
                 },
                 {
@@ -112,14 +146,23 @@ const RoomList = () => {
 
                     <ReactFlexyTable
                         data={data}
+                        columns={columns}
+                        //additionalCols={additionalCols}
                         pageSize={10}
                         sortable={true}
                         filterable={true}
-                        caseSensitive={false}
-                        additionalCols={additionalCols}
+                        caseSensitive={true}
                         showExcelButton
-                        nonFilterCols={["STT"]}
-                        nonSortCols={["STT"]}
+                        nonFilterCols={["STT", "action"]}
+                        nonSortCols={[ "action"]}
+                        previousText="Trước"
+                        nextText="Sau"
+                        downloadExcelText="Tải xuống bản Excel"
+                        ofText="của "
+                        rowsText="Số dòng "
+                        pageText="Trang "
+                        filteredDataText="Lọc "
+                        totalDataText="Tổng số "
                     />
                 </div>
             </>

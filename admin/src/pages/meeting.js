@@ -10,12 +10,15 @@ import { useHistory } from "react-router";
 import Header from "../components/header";
 import { Redirect } from "react-router";
 import { isLogin } from "../data/auth";
+import { meetingList } from "../data/data";
 
 
 
 const Meeting = props => {
 
-  const meeting = props.location.state;
+  const id = props.location.state;
+  const meeting = meetingList.find(item => item.event_id === id);
+  console.log(meeting);
   const history = useHistory();
 
   const [m_name, setm_name] = useState(meeting.subject);

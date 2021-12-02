@@ -6,8 +6,9 @@
   left: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  background: rgb(238, 238, 238);
+  background: rgb(255, 255, 255);
   color: rgb(65, 65, 65);
+  text-align: center;
 }
 
 .room-sidebar-container {
@@ -20,6 +21,7 @@
   overflow-y: auto;
   background: rgb(238, 238, 238);
   color: rgb(65, 65, 65);
+  text-align: center;
 }
 
 
@@ -27,7 +29,7 @@
 .sidebar-logo {
   padding: 10px 15px 10px 30px;
   font-size: 20px;
-  background-color: #008ae6;
+  background-color: #ffffff;
   text-align: center;
 }
 
@@ -69,7 +71,7 @@
 .sidebar-navigation li a:focus {
   text-decoration: none;
   outline: none;
-  background-color: #0099ff;
+  background-color: #ffffff;
 }
 
 .sidebar-navigation li button:active,
@@ -77,11 +79,11 @@
 .sidebar-navigation li button:focus {
   text-decoration: none;
   outline: none;
-  background-color: #0099ff;
+  background-color: #ffffff;
 }
 
 .sidebar-navigation li::before {
-  background-color: #0099ff;
+  background-color: #ffffff;
   position: absolute;
   content: '';
   height: 100%;

@@ -15,6 +15,8 @@ import { auth } from "../data/auth.js";
 import { participants, removeParticipant } from "../data/participant.js";
 import { Redirect } from "react-router";
 import { isLogin } from "../data/auth.js";
+import allLocales from '@fullcalendar/core/locales-all';
+
 
 export default function CreateMeeting() {
 
@@ -284,7 +286,17 @@ export default function CreateMeeting() {
                 initialView="timeGridWeek"
                 events={p_events[0]}
                 slotMinTime="07:00:00"
-                slotMaxTime="19:00:00"
+                slotMaxTime="22:00:00"
+                locales={allLocales}
+                locale='vi'
+                eventTimeFormat={{ // like '14:30:00'
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                }}
+                titleFormat={{
+                    year: 'numeric', month: '2-digit', day: 'numeric'
+                }}
             />
         );
     }
@@ -300,7 +312,17 @@ export default function CreateMeeting() {
                 resources={resourceList}
                 initialEvents={p_events[0]}
                 slotMinTime="07:00:00"
-                slotMaxTime="21:00:00"
+                slotMaxTime="22:00:00"
+                locales={allLocales}
+                locale='vi'
+                eventTimeFormat={{ // like '14:30:00'
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                }}
+                titleFormat={{
+                    year: 'numeric', month: '2-digit', day: 'numeric'
+                }}
 
             />
         );

@@ -8,11 +8,15 @@ import { useHistory } from "react-router";
 import Header from "../components/header";
 import { Redirect } from "react-router";
 import { isLogin } from "../data/auth";
+import { roomList } from "../data/data";
+
 
 const Room = props => {
 
-  const room = props.location.state;
+  const id = props.location.state;
+  const room = roomList.find(item => item.room_id === id);
   const history = useHistory();
+  console.log(room);
 
   const [r_name, setR_name] = useState(room.title);
   const [r_id, setr_id] = useState(room.room_id);

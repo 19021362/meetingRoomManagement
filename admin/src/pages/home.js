@@ -33,9 +33,10 @@ export const options = {
     plugins: {
         title: {
             display: true,
-            text: 'Biểu đồ tần suất sử dụng phòng',
+            text: 'Biểu đồ tần suất sử dụng phòng họp',
         },
     },
+    
 };
 
 const Home = () => {
@@ -59,7 +60,7 @@ const Home = () => {
         result.data.map((room, index) => {
             const label = room.lable;
             labels.push(label);
-            const freq = room.freq;
+            const freq = room.freq + 5;
             freqs.push(freq);
         });
         console.log(labels);
@@ -80,8 +81,9 @@ const Home = () => {
                 label: "lần sử dụng",
                 data: freqData,
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                
             }
-        ]
+        ],
     };
 
     const approveFeedback = (fb) => {
@@ -106,7 +108,7 @@ const Home = () => {
 
     const deleteFeedback = (id) => {
         confirmAlert({
-            title: 'Confirm',
+            title: 'Xác nhận',
             message: 'Bạn có muốn xóa phản hồi này không?',
             buttons: [
                 {
@@ -143,7 +145,7 @@ const Home = () => {
                 <div className="admin-content">
                     <div className="admin-accordition">
                         <h2>phản hồi của người dùng</h2>
-                        <Accordion flush>
+                        <Accordion flush style={{marginBottom: "50px"}}>
                             {
                                 feedbacks.map((fb, index) => (
                                     <Accordion.Item eventKey={index}>
@@ -165,7 +167,7 @@ const Home = () => {
                         </Accordion>
                         <hr />
                     </div>
-                    <div className="admin-chart" style={{ margin: "50px 50px 50px 50px", minHeight: "300px" }}>
+                    <div className="admin-chart" style={{ margin: "200px 50px 50px 50px", minHeight: "300px" }}>
                         <h2>Biểu đồ tần suất sử dụng phòng</h2>
                         <Bar
                             options={options} data={dataSet}

@@ -12,6 +12,7 @@ import "../styles/admin.css";
 import { isLogin } from '../data/auth';
 import { useHistory } from 'react-router';
 import { Redirect } from 'react-router';
+import { SetUsers } from '../data/data';
 
 const UserList = () => {
 
@@ -27,6 +28,7 @@ const UserList = () => {
         const datas = [];
         const result = await axios.get(localhost + "/user/all");
         setUserList(result.data);
+        SetUsers(result.data);
         result.data.map((user, index) => {
             const u = {
                 STT: index + 1,
@@ -37,20 +39,52 @@ const UserList = () => {
             datas.push(u);
         })
         setData(datas);
-    }
+    };
+
+    const columns = [
+        {
+            header: 'STT',
+            key: 'STT',
+        },
+        {
+            header: 'Tên',
+            key: 'Tên'
+        },
+        {
+            header: 'Email',
+            key: 'Email'
+        },
+        {
+            header: 'Thao tác',
+            //key: 'action',
+            td: (data, index) =>
+                <div>
+                    <Link to={{
+                        pathname: "/user/" + data.ID,
+                        state: data.ID
+                    }}>
+                        <Badge bg="secondary">Chi tiết</Badge>
+                    </Link>{' '}
+                    <Badge bg="danger" onClick={(e) => handleDelete(data.ID)}>Xóa</Badge>
+                </div>
+
+        }
+    ];
+
+
     const additionalCols = [
         {
-            header: 'Actions',
+            header: 'Thao tác',
             td: (data, index) => {
 
                 return (
                     <div>
                         <Link to={{
                             pathname: "/user/" + data.ID,
-                            state: userList[index]
+                            state: data.ID
                         }}>
                             <Badge bg="secondary">Chi tiết</Badge>
-                        </Link>
+                        </Link>{' '}
                         <Badge bg="danger" onClick={(e) => handleDelete(data.ID)}>Xóa</Badge>
                     </div>
                 );
@@ -59,9 +93,9 @@ const UserList = () => {
     ]
 
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         confirmAlert({
-            title: 'Confirm',
+            title: 'Xác nhận',
             message: 'Bạn có muốn xóa tài khoản này không?',
             buttons: [
                 {
@@ -74,7 +108,7 @@ const UserList = () => {
                             });
 
                         const users = data.filter(data => data.ID !== id);
-                        setData({ users });
+                        setData(users);
                     }
                 },
                 {
@@ -113,14 +147,23 @@ const UserList = () => {
 
                     <ReactFlexyTable
                         data={data}
+                        columns={columns}
+                        //additionalCols={additionalCols}
                         pageSize={10}
                         sortable={true}
                         filterable={true}
-                        caseSensitive={false}
-                        additionalCols={additionalCols}
+                        caseSensitive={true}
                         showExcelButton
-                        nonFilterCols={["STT"]}
-                        nonSortCols={["STT"]}
+                        nonFilterCols={["STT", "action"]}
+                        nonSortCols={["action"]}
+                        previousText="Trước"
+                        nextText="Sau"
+                        downloadExcelText="Tải xuống bản Excel"
+                        ofText="của "
+                        rowsText="Số dòng "
+                        pageText="Trang "
+                        filteredDataText="Lọc "
+                        totalDataText="Tổng số "
                     />
                 </div>
             </>

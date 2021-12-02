@@ -4,7 +4,7 @@ import { Container, Navbar} from "react-bootstrap";
 const Footer = () => {
     return(
     <>
-        <div className="Footer" style={{marginTop:"20px"}}>
+        {/* <div className="Footer" style={{marginTop:"20px"}}>
             <Navbar fixed='bottom'>
                 <Container>
                     <Navbar.Brand href="#home">SROOM Team</Navbar.Brand>
@@ -16,7 +16,7 @@ const Footer = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </div>
+        </div> */}
     </>
     );
 

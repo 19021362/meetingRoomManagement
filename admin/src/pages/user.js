@@ -8,11 +8,14 @@ import { useHistory } from "react-router";
 import Header from "../components/header";
 import { Redirect } from "react-router";
 import { isLogin } from "../data/auth";
+import { userList } from "../data/data";
 
 
 const User = props => {
 
-  const user = props.location.state;
+
+  const id = props.location.state;
+  const user = userList.find(item => item.user_id === id);
   const history = useHistory();
   console.log(user);
 

@@ -1,11 +1,10 @@
 import React from 'react';
-import SideBar from "../components/sideBar";
-import { Table, Dropdown, Form, ButtonGroup } from 'react-bootstrap';
+import { Table, Dropdown, Form, ButtonGroup, ListGroup } from 'react-bootstrap';
 import FullCalendar from "@fullcalendar/react";
 import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { Card, Button } from 'react-bootstrap';
-import RoomDetail from '../components/roomDetail.js'
+import allLocales from '@fullcalendar/core/locales-all';
 import '../styles/content.css';
 import '../styles/sidebar.css';
 import { Label } from 'reactstrap';
@@ -22,7 +21,7 @@ import { Redirect } from 'react-router';
 
 const Room = () => {
 
-    const [roomId, setRoomId] = useState();
+    const [roomId, setRoomId] = useState(-2);
 
     const [rooms, setRooms] = useState([]);
     const [roomIdFeedback, setRoomIdFeedback] = useState();
@@ -74,38 +73,36 @@ const Room = () => {
                             <i class="fa fa-star" aria-hidden="true"></i> Phòng họp
                         </Label>
                     </div>
-
-                    <ul class="sidebar-navigation">
-                        <li>
-                            <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(0)}
-                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", textAlign: "left" }}>
-                                <i class="fa fa-circle" aria-hidden="true"></i><strong>Tất cả phòng</strong>
-                            </Button>
-                        </li>
-                        {rooms.map((room, index) => (
-                            <li>
-
-                                <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(index + 1)} key={index}
-                                    style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", textAlign: "left" }}>
-                                    <i class="fa fa-circle" aria-hidden="true"></i>
-                                    Phòng {room.title}
-                                </Button>
-                            </li>
-                        ))}
-                    </ul>
                     <hr />
-                    <ul class="sidebar-navigation">
-                        <li>
-                            <Button block size="md" type="button" variant="primary" onClick={() => setRoomId(-1)}
-                                style={{ Height: "30px", minWidth: "200px", backgroundColor: "#0099ff", textAlign: "left" }}>
-                                <i class="fa fa-circle" aria-hidden="true"></i><strong>Gửi đánh giá</strong>
-                            </Button>
-                        </li>
-                    </ul>
+                    <ListGroup>
+                        <ListGroup.Item action variant="light" onClick={() => setRoomId(-2)}>
+                            <strong> Danh sách phòng họp </strong>
+                        </ListGroup.Item>
+                    </ListGroup>
+                    <hr />
+                    <p><strong> Lịch sử dụng </strong></p>
+                    <ListGroup>
+                        <ListGroup.Item action variant="light" onClick={() => setRoomId(0)} key={0}>
+                            Tất cả phòng
+                        </ListGroup.Item>
+                        {rooms.map((room, index) => (
+                            <ListGroup.Item action variant="light" onClick={() => setRoomId(index + 1)} key={index}>
+                                Phòng {room.title}
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                    <hr />
+
+                    <ListGroup>
+                        <ListGroup.Item action variant="light" onClick={() => setRoomId(-1)}>
+                            <strong> Phản hồi </strong>
+                        </ListGroup.Item>
+                    </ListGroup>
                 </div>
                 <div class="content-container">
 
                     <div class="container-fluid" style={{ backgroundColor: "white" }}>
+                        {roomId === -2 && roomCardList(rooms)}
                         {roomId === 0 && roomId_0(eventList)}
                         {roomIdOthers(eventList)}
                         {roomId === -1 && (<Feedback />)}
@@ -125,7 +122,17 @@ const Room = () => {
                     resources={resourceList}
                     initialEvents={p_events[0]}
                     slotMinTime="07:00:00"
-                    slotMaxTime="21:00:00"
+                    slotMaxTime="22:00:00"
+                    locales={allLocales}
+                    locale='vi'
+                    eventTimeFormat={{ // like '14:30:00'
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        meridiem: false
+                    }}
+                    titleFormat={{
+                        year: 'numeric', month: '2-digit', day: 'numeric'
+                    }}
                 />
             </>
         );
@@ -135,19 +142,7 @@ const Room = () => {
         if (roomId > 0) {
             return (
                 <>
-                    <Card>
-                        <Card.Header><h2>{"Phòng " + rooms[roomId - 1].title}</h2></Card.Header>
-                        <Card.Body>
-                            <ul>
-                                <li>Tòa nhà : {rooms[roomId - 1].department}<br /></li>
-                                <li>Tầng : {rooms[roomId - 1].floor}<br /></li>
-                                <li>Diện tích : {rooms[roomId - 1].area}<br /></li>
-                                <li>Sức chứa : {rooms[roomId - 1].capacity}<br /></li>
-                                <li>Thiết bị : {rooms[roomId - 1].equipment}<br /></li>
-                                <li>tình trạng : {rooms[roomId - 1].status}<br /></li>
-                            </ul>
-                        </Card.Body>
-                    </Card>
+
 
                     <FullCalendar
                         schedulerLicenseKey='CC-Attribution-NonCommercial-NoDerivatives'
@@ -165,7 +160,17 @@ const Room = () => {
                         }}
                         initialEvents={p_events[0]}
                         slotMinTime="07:00:00"
-                        slotMaxTime="21:00:00"
+                        slotMaxTime="22:00:00"
+                        locales={allLocales}
+                        locale='vi'
+                        eventTimeFormat={{ // like '14:30:00'
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            meridiem: false
+                        }}
+                        titleFormat={{
+                            year: 'numeric', month: '2-digit', day: 'numeric'
+                        }}
                     />
 
                 </>
@@ -173,7 +178,29 @@ const Room = () => {
         }
     };
 
+    function roomCardList(...roomArray) {
+        console.log(roomArray[0]);
+        return (
+            <>
+                {roomArray[0].map((room, index) => (
+                    <Card>
+                        <Card.Header><h2>{"Phòng " + room.title}</h2></Card.Header>
+                        <Card.Body>
+                            <ul>
+                                <li>Tòa nhà : {room.department}<br /></li>
+                                <li>Tầng : {room.floor}<br /></li>
+                                <li>Diện tích : {room.area + " m2"}<br /></li>
+                                <li>Sức chứa : {room.capacity + " ghế"}<br /></li>
+                                <li>Thiết bị : {room.equipment}<br /></li>
+                                <li>tình trạng : {(room.status ? "Hoạt động" : "Bảo trì")} <br /></li>
+                            </ul>
+                        </Card.Body>
+                    </Card>
+                ))}
 
+            </>
+        );
+    }
 
 
 };

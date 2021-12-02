@@ -52,6 +52,27 @@ export default class MyMeetingList extends React.Component {
 
     };
 
+    formatDate(date) {
+        const newDate = new Date(date);
+        var dateString = "";
+        var monthString = "";
+
+        if(newDate.getDate() < 10) {
+            dateString = "0" + newDate.getDate();
+        } else {
+            dateString = "" + newDate.getDate();
+        }
+
+        if(newDate.getMonth < 9) {
+            monthString = "0" + (newDate.getMonth() + 1);
+        } else {
+            monthString = "" + (newDate.getMonth() + 1);
+        }
+
+        const res = dateString + "-" + monthString + "-" + newDate.getFullYear();
+        return res;
+    };
+
 
 
     render() {
@@ -64,11 +85,11 @@ export default class MyMeetingList extends React.Component {
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>ID cuộc họp</th>
+                            <th>STT</th>
                             <th>Tên cuộc họp</th>
                             <th>Ngày</th>
-                            <th>Loại</th>
+                            <th>Thời gian</th>
+                            <th>Địa điểm</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,10 +97,10 @@ export default class MyMeetingList extends React.Component {
                             this.state.meetings.map((meeting, i) => (
                                 <tr key={i}>
                                     <td>{i + 1}</td>
-                                    <td>{meeting.event_id}</td>
                                     <td>{meeting.subject}</td>
-                                    <td>{meeting.date}</td>
-                                    <td>{meeting.type}</td>
+                                    <td>{this.formatDate(meeting.date)}</td>
+                                    <td>{(meeting.start_time + " - " + meeting.end_time)}</td>
+                                    <td>{(meeting.room_name + " " + meeting.room_local)}</td>
                                     <td>
                                         <Link to={{
                                             pathname: "/meeting/" + meeting.event_id,
