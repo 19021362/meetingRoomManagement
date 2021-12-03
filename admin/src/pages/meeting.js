@@ -167,7 +167,7 @@ const Meeting = props => {
               <Form.Group size="lg" controlId="m_piority">
                 <Form.Label>Tính chất cuộc họp</Form.Label>
                 <select class="form-control" value={m_type} onChange={(e) => setm_type(e.target.value)}>
-                  <option value="0">Binhg thường</option>
+                  <option value="0">Bình thường</option>
                   <option value="1">Khẩn cấp</option>
                 </select>
               </Form.Group>
