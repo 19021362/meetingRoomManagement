@@ -15,6 +15,7 @@ import axios from 'axios';
 import Feedback from '../tag/feedback';
 import { isLogin } from '../data/auth';
 import { Redirect } from 'react-router';
+import { Tooltip } from 'bootstrap';
 
 
 
@@ -133,10 +134,28 @@ const Room = () => {
                     titleFormat={{
                         year: 'numeric', month: '2-digit', day: 'numeric'
                     }}
+                    resourceLabelDidMount={function (info) {
+                        var questionMark = document.createElement('span');
+                        questionMark.innerText = ' (chi tiết) ';
+
+                        info.el.appendChild(questionMark);
+                        const r = rooms.find(i => i.room_id == info.resource.id);
+                        const r_title = "Sức chứa: " + r.capacity + " người. \n"
+                            + " Địa điểm: tầng " + r.floor + " tòa " + r.department + ". \n"
+                            + " Thiết bị: " + r.equipment;
+                        var tooltip = new Tooltip(questionMark, {
+                            title: r_title,
+                            placement: 'top',
+                            trigger: 'hover',
+                            container: 'body'
+                        });
+                    }}
                 />
             </>
         );
     }
+
+
 
     function roomIdOthers(...p_events) {
         if (roomId > 0) {
@@ -170,6 +189,22 @@ const Room = () => {
                         }}
                         titleFormat={{
                             year: 'numeric', month: '2-digit', day: 'numeric'
+                        }}
+                        resourceLabelDidMount={function (info) {
+                            var questionMark = document.createElement('span');
+                            questionMark.innerText = ' (chi tiết) ';
+    
+                            info.el.appendChild(questionMark);
+                            const r = rooms.find(i => i.room_id == info.resource.id);
+                            const r_title = "Sức chứa: " + r.capacity + " người. \n"
+                            + " Địa điểm: tầng " + r.floor + " tòa " + r.department + ". \n"
+                            + " Thiết bị: " + r.equipment;
+                            var tooltip = new Tooltip(questionMark, {
+                                title: r_title,
+                                placement: 'top',
+                                trigger: 'hover',
+                                container: 'body'
+                            });
                         }}
                     />
 

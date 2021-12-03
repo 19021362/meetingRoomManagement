@@ -16,6 +16,7 @@ import { participants, removeParticipant } from "../data/participant.js";
 import { Redirect } from "react-router";
 import { isLogin } from "../data/auth.js";
 import allLocales from '@fullcalendar/core/locales-all';
+import { Tooltip } from "bootstrap";
 
 
 export default function CreateMeeting() {
@@ -31,6 +32,7 @@ export default function CreateMeeting() {
     const [m_priority, setM_priority] = useState("NORMAL")
 
     const [resourceList, setResource] = useState([]);
+    const [rooms, setRooms] = useState([]);
     const [eventList, setEvent] = useState([]);
     const [userEventList, setUserEvent] = useState([]);
 
@@ -54,9 +56,15 @@ export default function CreateMeeting() {
             setResource(result.data);
         };
 
+        const fetchRooms = async () => {
+            const result = await axios.get(localhost + "/room/all");
+            setRooms(result.data);
+        };
+
         fetchUserEvents();
         fetchEvents();
         fetchResources();
+        fetchRooms()
     }, [])
 
 
@@ -253,8 +261,8 @@ export default function CreateMeeting() {
                 <Form.Group size="lg" controlId="room">
                     <Form.Label>Chọn phòng họp</Form.Label>
                     <Form.Control as="select" value={m_room} onChange={(e) => { setM_room(e.target.value); console.log(e.target.value) }}>
-                        {resourceList.map((room, index) => (
-                            <option key={index} value={room.id}>{room.title}</option>
+                        {rooms.map((room, index) => (
+                            <option key={index} value={room.room_id}>{room.status ? room.title : room.title + ' đang bảo trì'}</option>
                         ))}
                     </Form.Control>
                 </Form.Group>
@@ -323,7 +331,22 @@ export default function CreateMeeting() {
                 titleFormat={{
                     year: 'numeric', month: '2-digit', day: 'numeric'
                 }}
+                resourceLabelDidMount={function (info) {
+                    var questionMark = document.createElement('span');
+                    questionMark.innerText = ' (chi tiết) ';
 
+                    info.el.appendChild(questionMark);
+                    const r = rooms.find(i => i.room_id == info.resource.id);
+                    const r_title = "Sức chứa: " + r.capacity + " người. \n"
+                        + " Địa điểm: tầng " + r.floor + " tòa " + r.department + ". \n"
+                        + " Thiết bị: " + r.equipment;
+                    var tooltip = new Tooltip(questionMark, {
+                        title: r_title,
+                        placement: 'top',
+                        trigger: 'hover',
+                        container: 'body'
+                    });
+                }}
             />
         );
 

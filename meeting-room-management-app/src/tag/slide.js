@@ -20,7 +20,7 @@ const Slide = () => {
                         alt="First slide"
                         style= {{opacity: "0.9",  justifyContent:"center", maxHeight:"700px"}}
                     />
-                    <Carousel.Caption style={{backgroundColor: "white", opacity:"0.7", color:"black"}}>
+                    <Carousel.Caption style={{backgroundColor: "white", opacity:"0.8", color:"black"}}>
                         <h1>Tạo cuộc họp</h1>
                         <h2>Lên kế hoạch và tạo cuộc họp dễ dàng.</h2>
                     </Carousel.Caption>
@@ -33,9 +33,22 @@ const Slide = () => {
                         style= {{opacity: "0.9",  justifyContent:"center", maxHeight:"700px" }}
                     />
 
-                    <Carousel.Caption style={{backgroundColor: "white", opacity:"0.7", color:"black"}}>
+                    <Carousel.Caption style={{backgroundColor: "white", opacity:"0.8", color:"black"}}>
+                        <h1>Tìm kiếm phòng họp thông minh</h1>
+                        <h2>Phù hợp với từng mục đích hay nhu cầu sử dụng, .</h2>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="https://images.unsplash.com/photo-1624969862293-b749659ccc4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                        alt="Second slide"
+                        style= {{opacity: "0.9",  justifyContent:"center", maxHeight:"700px" }}
+                    />
+
+                    <Carousel.Caption style={{backgroundColor: "white", opacity:"0.8", color:"black"}}>
                         <h1>Quản lí lịch trình</h1>
-                        <h2>Tiết kiệm thời gian bằng việc quản lí thời gian khoa học.</h2>
+                        <h2>Tiết kiệm thời gian bằng việc quản lí lịch trình khoa học.</h2>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -46,10 +59,10 @@ const Slide = () => {
                         style= {{opacity: "0.9",  justifyContent:"center", maxHeight:"700px" }}
                     />
 
-                    <Carousel.Caption style={{backgroundColor: "white", opacity:"0.7", color:"black"}}>
+                    <Carousel.Caption style={{backgroundColor: "white", opacity:"0.8", color:"black"}}>
                         <h1>Quản lí phòng họp đơn giản, khoa học</h1>
                         <h2>
-                            Giảm tải công việc cho các ban, phòng quản lí nhân lực trong việc tổ chức tìm kiếm phòng họp.
+                            Giảm tải công việc cho các ban, phòng quản lí nhân lực trong việc tổ chức, quản lí phòng họp.
                         </h2>
                     </Carousel.Caption>
                 </Carousel.Item>

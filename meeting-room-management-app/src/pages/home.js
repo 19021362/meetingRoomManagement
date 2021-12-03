@@ -126,7 +126,7 @@ const Home = () => {
         alert(
             "Tên cuộc họp: " + event.subject + "\n"
             + "Nội dung: " + event.description + "\n"
-            + "Ngày: " + event.date + "\n"
+            + "Ngày: " + formatDate(event.date) + "\n"
             + "Giờ bắt đầu: " + event.start_time + "\n"
             + "Giờ kết thúc: " + event.end_time + "\n"
             + "Phòng họp: " + event.room_name + "\n"

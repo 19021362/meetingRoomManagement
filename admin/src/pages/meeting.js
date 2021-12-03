@@ -11,6 +11,7 @@ import Header from "../components/header";
 import { Redirect } from "react-router";
 import { isLogin } from "../data/auth";
 import { meetingList } from "../data/data";
+import { Row, Col } from "react-bootstrap";
 
 
 
@@ -135,42 +136,54 @@ const Meeting = props => {
               <Form.Group size="lg" controlId="m_decs">
                 <Form.Label>Mô tả</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="textarea"
+                  style={{height:"80px"}}
                   value={m_desc}
                   onChange={(e) => setm_desc(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group size="lg" controlId="m_date">
-                <Form.Label>Ngày tổ chức</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={m_date}
-                  onChange={(e) => setm_date(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group size="lg" controlId="m_starttime">
-                <Form.Label>từ giờ</Form.Label>
-                <Form.Control
-                  type="time"
-                  value={m_Stime}
-                  onChange={(e) => setm_Stime(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group size="lg" controlId="m_endtime">
-                <Form.Label>đến giờ</Form.Label>
-                <Form.Control
-                  type="time"
-                  value={m_Etime}
-                  onChange={(e) => setm_Etime(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group size="lg" controlId="m_piority">
+
+              <Row>
+                <Col>
+                  <Form.Group size="lg" controlId="m_date">
+                    <Form.Label>Ngày tổ chức</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={m_date}
+                      onChange={(e) => setm_date(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group size="lg" controlId="m_starttime">
+                    <Form.Label>từ giờ</Form.Label>
+                    <Form.Control
+                      type="time"
+                      value={m_Stime}
+                      onChange={(e) => setm_Stime(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group size="lg" controlId="m_endtime">
+                    <Form.Label>đến giờ</Form.Label>
+                    <Form.Control
+                      type="time"
+                      value={m_Etime}
+                      onChange={(e) => setm_Etime(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+
+              {/* <Form.Group size="lg" controlId="m_piority">
                 <Form.Label>Tính chất cuộc họp</Form.Label>
                 <select class="form-control" value={m_type} onChange={(e) => setm_type(e.target.value)}>
                   <option value="0">Bình thường</option>
                   <option value="1">Khẩn cấp</option>
                 </select>
-              </Form.Group>
+              </Form.Group> */}
               <Form.Group size="lg" controlId="m_room">
                 <Form.Label>Tổ chức tại phòng</Form.Label>
                 <select class="form-control" value={m_roomId} onChange={(e) => setm_roomId(e.target.value)}>
@@ -191,7 +204,7 @@ const Meeting = props => {
                 <Form.Label>Người tham dự</Form.Label>
                 <ListGroup>
                   {participants.map((user) => (
-                    <ListGroup.Item as="li">{user.email}</ListGroup.Item>
+                    <ListGroup.Item as="li">{user.name}</ListGroup.Item>
                   ))}
                 </ListGroup>
               </div>

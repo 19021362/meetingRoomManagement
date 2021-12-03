@@ -155,6 +155,9 @@ const Schedule = () => {
                 titleFormat={{
                     year: 'numeric', month: '2-digit', day: 'numeric'
                 }}
+                listDayFormat={{
+                    year: 'numeric', month: '2-digit', day: 'numeric'
+                }}
                 headerToolbar={{
                     start: 'title', // will normally be on the left. if RTL, will be on the right
                     center: '',
