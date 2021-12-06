@@ -220,8 +220,8 @@ export default function CreateMeeting() {
                 <Form.Group size="lg" controlId="priority">
                     <Form.Label>Mức độ ưu tiên</Form.Label>
                     <Form.Control as="select" value={m_priority} onChange={(e) => setM_priority(e.target.value)}>
-                        <option value="NORMAL">thông thường</option>
-                        <option value="IMPORTANT">khẩn cấp</option>
+                        <option value="NORMAL">Thông thường</option>
+                        <option value="IMPORTANT">Khẩn cấp</option>
                     </Form.Control>
 
                 </Form.Group>

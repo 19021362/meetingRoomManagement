@@ -52,7 +52,7 @@ const Feedback = () => {
                         <select class="form-control" value={roomId}
                             onChange={(e) => setRoomId(e.target.value)}>
                             {rooms.map((room, index) => (
-                                <option key={index} value={room.room_id}>{room.title}</option>
+                                <option key={index} value={room.room_id}>Phòng {room.title}</option>
                             ))}
                         </select>
                     </Form.Group>

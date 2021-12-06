@@ -227,7 +227,7 @@ const Room = () => {
                                 <li>Diện tích : {room.area + " m2"}<br /></li>
                                 <li>Sức chứa : {room.capacity + " ghế"}<br /></li>
                                 <li>Thiết bị : {room.equipment}<br /></li>
-                                <li>tình trạng : {(room.status ? "Hoạt động" : "Bảo trì")} <br /></li>
+                                <li>Tình trạng : {(room.status ? "Hoạt động" : "Bảo trì")} <br /></li>
                             </ul>
                         </Card.Body>
                     </Card>

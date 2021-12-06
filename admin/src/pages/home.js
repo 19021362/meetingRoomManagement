@@ -101,7 +101,7 @@ const Home = () => {
                 }
             });
 
-        alert("đã phê duyệt");
+        alert("Đã phê duyệt");
 
         setFeedback(feedbacks.filter(_fb => _fb !== fb))
     };
@@ -144,7 +144,7 @@ const Home = () => {
             <>
                 <div className="admin-content">
                     <div className="admin-accordition">
-                        <h2>phản hồi của người dùng</h2>
+                        <h2>Phản hồi của người dùng</h2>
                         <Accordion flush style={{marginBottom: "50px"}}>
                             {
                                 feedbacks.map((fb, index) => (
@@ -168,7 +168,7 @@ const Home = () => {
                         <hr />
                     </div>
                     <div className="admin-chart" style={{ margin: "200px 50px 50px 50px", minHeight: "300px" }}>
-                        <h2>Biểu đồ tần suất sử dụng phòng</h2>
+                        <h2>Biểu đồ tần suất sử dụng phòng họp</h2>
                         <Bar
                             options={options} data={dataSet}
                         />
