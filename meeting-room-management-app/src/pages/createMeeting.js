@@ -217,14 +217,14 @@ export default function CreateMeeting() {
                     />
                 </Form.Group>
 
-                <Form.Group size="lg" controlId="priority">
+                {/* <Form.Group size="lg" controlId="priority">
                     <Form.Label>Mức độ ưu tiên</Form.Label>
                     <Form.Control as="select" value={m_priority} onChange={(e) => setM_priority(e.target.value)}>
                         <option value="NORMAL">Thông thường</option>
                         <option value="IMPORTANT">Khẩn cấp</option>
                     </Form.Control>
 
-                </Form.Group>
+                </Form.Group> */}
 
                 <Button block size="lg" type="button" disabled={!validateForm()}
                     style={{ width: "120px", margin: "20px 10px 10px 10px" }} variant="outline-primary"

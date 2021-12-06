@@ -25,7 +25,7 @@ export default class MyMeetingList extends React.Component {
 
     handleDelete(id) {
         confirmAlert({
-            title: 'Confirm',
+            title: 'Xác nhận',
             message: 'Bạn có muốn xóa cuộc họp này không?',
             buttons: [
                 {
@@ -39,7 +39,6 @@ export default class MyMeetingList extends React.Component {
 
                         const meetings = this.state.meetings.filter(meeting => meeting.meeting_id !== id);
                         this.setState({ meetings });
-
                     }
                 },
                 {
